@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { } from "react"
 import StatusBarItem from "./StatusBarItem"
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -16,25 +15,12 @@ import {
   DropdownMenuTrigger,
 } from "@components/ui/dropdown-menu"
 const AppIconPlaceHolder = "/static/images/icons/app-icons-placeholder.svg?url"
-import {
-  ArrowBigRight,
-  ArrowRight,
-  CheckCheckIcon,
-  Keyboard,
-  LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  UserPlus,
-  Users,
-} from "lucide-react"
-import CommandIcon from "src/assets/icons/System/Command.svg"
 import Image from "next/image"
 import { useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import AppLauncher from "../common/AppLauncher"
 // import TfiAngleRight from "react-icons/tfi"
+
 const StatusBarSystem = () => {
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   return (

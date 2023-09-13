@@ -1,0 +1,28 @@
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuTrigger } from '@components/ui/dropdown-menu';
+import React from 'react';
+import StatusBarItem from '../../status-bar/StatusBarItem';
+import { useAppContext } from '../../app-window/appContext';
+import { useDispatch } from 'react-redux';
+import { terminateApp, updateAppStatus } from 'src/core/redux/memory/memory.slice';
+
+const WindowMenu = () => {
+
+  const { app, onTerminate, onHide } = useAppContext();
+
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <StatusBarItem type="text" label="Window" />
+      </DropdownMenuTrigger>
+      <DropdownMenuPortal>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={onHide}>Minimize</DropdownMenuItem>
+          <DropdownMenuItem onClick={onTerminate}>Close</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenuPortal>
+    </DropdownMenu>
+  );
+};
+
+export default WindowMenu;

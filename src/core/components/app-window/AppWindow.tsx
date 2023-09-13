@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
 import { updateAppStatus, terminateApp, setStatusBar } from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
-import CommonStatusBar from "src/misc/trials/CommonStatusBar"
+import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 
 
 const defaultHeight = 480
