@@ -14,6 +14,7 @@ import Messages from "src/apps/Messages"
 import Photos from "src/apps/Photos"
 import Safari from "src/apps/Safari"
 import SystemPreferences from "src/apps/SystemPreferences"
+import VsCode from "src/apps/VsCode"
 
 
 
@@ -243,6 +244,28 @@ export const apps: IApp[] = [
     component: Contacts,
     config: {
       initTitle: "Contacts",
+      initWindowWidth: 640,
+      initWindowHeight: 480,
+      startMaximized: true,
+      isDefault: true,
+      isPinned: false,
+      template: IAppTemplate.WINDOW,
+    },
+  },
+
+  {
+    id: 11,
+    name: "Visual Studio Code",
+    icon: "/static/images/icons/vscode-app.png",
+    status: {},
+    metadata: {
+      title: "Visual Studio Code", // The title of the app
+      description: "System default launcher", // A short description or tooltip
+      version: "0.0.1", // App version number
+    },
+    component: VsCode,
+    config: {
+      initTitle: "Vs code",
       initWindowWidth: 640,
       initWindowHeight: 480,
       startMaximized: true,

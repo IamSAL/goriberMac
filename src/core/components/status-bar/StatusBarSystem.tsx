@@ -21,6 +21,7 @@ import {
   ArrowRight,
   CheckCheckIcon,
   Keyboard,
+  LogOut,
   Mail,
   MessageSquare,
   Plus,
@@ -30,37 +31,56 @@ import {
 } from "lucide-react"
 import CommandIcon from "src/assets/icons/System/Command.svg"
 import Image from "next/image"
+import { useSelector } from "react-redux"
+import { AppState } from "src/core/redux/redux"
+import AppLauncher from "../common/AppLauncher"
 // import TfiAngleRight from "react-icons/tfi"
 const StatusBarSystem = () => {
+  const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger >
         <StatusBarItem type="icon" icon="/static/images/icons/icons-system-icon.svg" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-2 mx-2">
         <DropdownMenuItem>About this Mac</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>System Preferences...</DropdownMenuItem>
-        <DropdownMenuItem>App Store...</DropdownMenuItem>
+        <DropdownMenuItem><div className="flex justify-between gap-28 w-full">
+          <div className="">App Store...</div>
+          <div className="text-[11px] bg-slate-600 p-[2px] px-2 rounded-full">5 updates</div>
+        </div>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger className="">
-              <span className="mr-36">Recent Items</span>
+              <span>Recent Items</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
-                <DropdownMenuItem>
-                  {/* <div>
-                  <Image src={AppIconPlaceHolder} width={35} height={35} ></Image>
-                </div> */}
-                  <span>Mail</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <MessageSquare className="mr-2 h-4 w-4" />
-                  <span>Messages</span>
-                </DropdownMenuItem>
+                <DropdownMenuLabel>Applications</DropdownMenuLabel>
+
+                {
+                  runningApps.map(app => {
+                    return <DropdownMenuItem key={app.id}>
+                      <AppLauncher appId={app.id}>
+                        <div className="flex">
+                          <Image src={app.icon} width={18} height={18} alt={app.name} />
+                          <span className="ml-1">{app.name}</span>
+                        </div>
+                      </AppLauncher>
+                    </DropdownMenuItem>
+                  })
+                }
                 <DropdownMenuSeparator />
+                <DropdownMenuLabel>Documents</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel>Servers</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem ><span>
+                  Clear menu</span></DropdownMenuItem>
+
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
@@ -72,10 +92,13 @@ const StatusBarSystem = () => {
         <DropdownMenuItem>Restart...</DropdownMenuItem>
         <DropdownMenuItem>Shut Down...</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Lock Screen</DropdownMenuItem>
         <DropdownMenuItem>
-          <span className="mr-25">Logout Guest User</span>
-          <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+          <span>Lock Screen</span>
+          <DropdownMenuShortcut>⇧⌘T</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <span>Log out </span>
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

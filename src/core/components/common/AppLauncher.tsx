@@ -32,7 +32,7 @@ const AppLauncher = ({ children, appId }: IAppLauncherProps) => {
           })
         default:
           if (runningInstance) {
-            dispatch(updateAppStatus([app, { isHidden: false }]))
+            dispatch(updateAppStatus([app, { isHidden: false, isFOREGROUND: true }]))
           } else {
             dispatch(startApp(app))
           }

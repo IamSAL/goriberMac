@@ -139,7 +139,7 @@ const AppWindow = React.memo((props: IAppProps) => {
         <div
           style={{
             ...dimensions.style,
-            zIndex: app.status.isFOREGROUND ? "99" : "auto",
+            zIndex: app.status.isFOREGROUND ? "49" : "auto",
             display: app.status.isHidden ? "none" : "block",
           }}
           ref={programRef}
@@ -148,11 +148,9 @@ const AppWindow = React.memo((props: IAppProps) => {
           }}
         >
           <Resizable
-            className={`border-white ${
-              app.status.isMAXIMIZED ? "rounded-[0px]" : "rounded-[10px]"
-            }  shadow-lg  bg-white dark:bg-black bg-opacity-50 dark:bg-opacity-50 overflow-hidden transition-all duration-75  ${
-              isResizing ? "border-0" : ""
-            }`}
+            className={`border-white ${app.status.isMAXIMIZED ? "rounded-[0px]" : "rounded-[10px]"
+              }  shadow-lg  bg-white dark:bg-black backdrop-blur-md bg-opacity-50 dark:bg-opacity-50 overflow-hidden transition-all duration-75  ${isResizing ? "border-0" : ""
+              }`}
             onResizeStart={() => setisResizing(true)}
             size={{ width: dimensions.style.width, height: dimensions.style.height }}
             onResizeStop={handleResize}

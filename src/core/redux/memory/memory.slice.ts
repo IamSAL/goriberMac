@@ -4,9 +4,12 @@ import { updateAppsInstances, removeAppInstance, updateAppStatuses } from "./mem
 
 interface IMemoryState {
   appsInstances: Array<IApp>
+  currentApp?: { app: IApp }
+  statusBar: JSX.Element | null
 }
 const initialState: IMemoryState = {
   appsInstances: [],
+  statusBar: null,
 }
 
 export const memorySlice = createSlice({
@@ -34,8 +37,14 @@ export const memorySlice = createSlice({
         appsInstances: removeAppInstance(state.appsInstances, appId),
       }
     },
+    setStatusBar: (state, action: PayloadAction<JSX.Element | null>) => {
+      return {
+        ...state,
+        statusBar: action.payload,
+      }
+    },
   },
 })
 
-export const { startApp, terminateApp, updateAppStatus } = memorySlice.actions
+export const { startApp, terminateApp, updateAppStatus, setStatusBar } = memorySlice.actions
 export default memorySlice.reducer

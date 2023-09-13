@@ -17,10 +17,10 @@ import StatusBarSystem from "./StatusBarSystem"
 const StatusBar = () => {
   const { isTouchingTop } = useMousePosition({ offsetTop: 20, offsetBottom: 0 })
   const { isMaximized } = useSelector((state: AppState) => state.system)
+  const currentStatusBar = useSelector((state: AppState) => state.memory.statusBar)
   const isStatusBarHovered = false
   const shouldShow = isTouchingTop || !isMaximized || isStatusBarHovered
 
-  console.log({ shouldShow })
   return (
     <div
       className={cn(styles.StatusBar, "flex z-[9999] justify-between align-middle px-[12px]")}
@@ -30,23 +30,13 @@ const StatusBar = () => {
     >
       <div className="LeftSide flex align-middle gap-0">
         <StatusBarSystem />
-        <StatusBarItem type="text" label="Code" className="font-semibold px-1" />
-        <StatusBarItem type="text" label="File" />
-        <StatusBarItem type="text" label="Edit" />
-        <StatusBarItem type="text" label="Selection" />
-        <StatusBarItem type="text" label="View" />
-        <StatusBarItem type="text" label="Go" />
-        <StatusBarItem type="text" label="Run" />
-        <StatusBarItem type="text" label="Terminal" />
-        <StatusBarItem type="text" label="Window" />
-        <StatusBarItem type="text" label="Help" />
+        {currentStatusBar}
       </div>
       <div className={cn(`RightSide flex align-middle gap-0 `, styles.RightSide)}>
         <StatusBarItem type="icon" icon={<IconMoon color="white" fontSize={"26px"} />} />
         <StatusBarItem type="icon" icon={<IconBattery color="white" fontSize={"26px"} />} />
         <StatusBarItem type="icon" icon={<IconWifi color="white" fontSize={"26px"} />} />
         <StatusBarItem type="icon" icon={<IconControl color="white" fontSize={"26px"} />} />
-
         <StatusBarClock />
       </div>
     </div>

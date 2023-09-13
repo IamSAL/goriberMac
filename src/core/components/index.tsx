@@ -5,5 +5,5 @@ export * from "./ui/LabeledTextField"
 export * from "./app-window/AppWindow"
 import ModalsProvider from "./wrappers/ModalProvider"
 export * from "./ui/Form"
-
-export { Dock, StatusBar, ModalsProvider, AppWindow }
+import StatusBarItem from "./status-bar/StatusBarItem"
+export { Dock, StatusBar, ModalsProvider, AppWindow, StatusBarItem }
