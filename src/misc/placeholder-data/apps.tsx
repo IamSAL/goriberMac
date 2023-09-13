@@ -3,17 +3,19 @@
 import { AppWindow } from "@components"
 import { IApp, IAppTemplate } from "@types"
 
-import AppStore from "src/apps/appStore"
-import Calendar from "src/apps/calendar"
-import Contacts from "src/apps/contacts"
-import Finder from "src/apps/finder"
-import LaunchPad from "src/apps/launchpad"
-import Mail from "src/apps/mail"
-import Maps from "src/apps/maps"
-import Messages from "src/apps/messages"
-import Photos from "src/apps/photos"
-import Safari from "src/apps/safari"
-import SystemPreferences from "src/apps/systemPreferences"
+import AppStore from "src/apps/AppStore"
+import Calendar from "src/apps/Calendar"
+import Contacts from "src/apps/Contacts"
+import Finder from "src/apps/Finder"
+import LaunchPad from "src/apps/Launchpad"
+import Mail from "src/apps/Mail"
+import Maps from "src/apps/Maps"
+import Messages from "src/apps/Messages"
+import Photos from "src/apps/Photos"
+import Safari from "src/apps/Safari"
+import SystemPreferences from "src/apps/SystemPreferences"
+
+
 
 export const apps: IApp[] = [
   {
