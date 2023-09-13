@@ -1,0 +1,56 @@
+import React from "react"
+
+import Link from "next/link"
+import DockItem from "./DockItem"
+import { apps } from "src/misc/placeholder-data/apps"
+import { useSelector } from "react-redux"
+import { AppState } from "src/core/redux/redux"
+import useMousePosition from "src/helpers/hooks/useMousePosition"
+
+const Dock = () => {
+  const { isTouchingBottom } = useMousePosition({ offsetTop: 0, offsetBottom: 100 })
+  const { isMaximized } = useSelector((state: AppState) => state.system)
+  const isDockHovered = false
+  const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
+
+  const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
+  const allDockApps = runningApps
+    .concat(apps.filter((app) => app.config.isDefault || app.config.isPinned))
+    .filter((app, index, self) => self.findIndex((tempApp) => tempApp.id === app.id) === index)
+    .sort((a, b) => a.id - b.id)
+
+  // Filter apps into different categories
+  const defaultApps = allDockApps.filter((app) => app.config.isDefault && app.config.isPinned)
+  const pinnedApps = allDockApps.filter((app) => app.config.isPinned && !app.config.isDefault)
+  const otherRunningApps = allDockApps.filter(
+    (app) => !defaultApps.some((tempApp) => tempApp.id === app.id)
+  )
+
+  return (
+    <div className="dock-container z-[9999]" style={{ display: shouldShow ? "flex" : "none" }}>
+      <div className="mx-auto h-16 px-2 pt-1.5 pb-0.5 bg-gray-500 bg-opacity-10 rounded-2xl border border-white border-opacity-25 flex-col justify-start items-start gap-2.5 inline-flex">
+        <div className="justify-center items-center gap-2 flex w-full">
+          <div className="justify-center   flex">
+            {defaultApps.map((app, idx) => (
+              <DockItem key={app.name} app={app} />
+            ))}
+          </div>
+          <div className="w-px h-12 bg-white bg-opacity-25" />
+          <div className="justify-center   flex">
+            {otherRunningApps.map((app, idx) => (
+              <DockItem key={app.name} app={app} />
+            ))}
+          </div>
+          <div className="w-px h-12 bg-white bg-opacity-25" />
+          <div className="justify-center  flex">
+            {pinnedApps.map((app, idx) => (
+              <DockItem key={app.name} app={app} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Dock
