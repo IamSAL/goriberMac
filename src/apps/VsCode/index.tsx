@@ -7,14 +7,13 @@ import VsCodeStatusBar from "./VsCodeStatusBar"
 
 
 const VsCode = () => {
-  const { setAppBarElement } = useAppContext()
-  const dispatch = useDispatch();
+  const { setAppBarElement, setStatusBarElement } = useAppContext()
   useEffect(() => {
-    setAppBarElement(VsCodeAppBar)
-    dispatch(setStatusBar(<VsCodeStatusBar />))
+    setAppBarElement(<VsCodeAppBar />)
+    setStatusBarElement(<VsCodeStatusBar />)
     return () => { }
   }, [])
-  return <div>App Store</div>
+  return <div>Vs code</div>
 }
 
 export default VsCode

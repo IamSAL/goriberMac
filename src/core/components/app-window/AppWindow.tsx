@@ -10,8 +10,9 @@ import StatusBar from "../status-bar/StatusBar"
 import { AppContext, IAppContext } from "./appContext"
 import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
-import { updateAppStatus, terminateApp } from "src/core/redux/memory/memory.slice"
+import { updateAppStatus, terminateApp, setStatusBar } from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
+
 
 const defaultHeight = 480
 const defaultWidth = 640
@@ -45,6 +46,7 @@ const AppWindow = React.memo((props: IAppProps) => {
   const [disk] = useState(initDisk(app.id, app.metadata.version || 1))
 
   const [AppBarElement, setAppBarElement] = useState(<></>)
+  const [StatusBarElement, setStatusBarElement] = useState(<></>)
   const [isResizing, setisResizing] = useState(false)
 
   const [dimensions, updateDimensions] = useState({
@@ -57,6 +59,9 @@ const AppWindow = React.memo((props: IAppProps) => {
     style: { height: initWindowHeight, width: initWindowWidth },
   })
   const [oldDimensions, setoldDimensions] = useState(dimensions)
+
+
+
   const handleDrag = (e, ui) => {
     console.log({ ui })
     updateDimensions((prev) => {
@@ -118,6 +123,7 @@ const AppWindow = React.memo((props: IAppProps) => {
     app,
     AppBarElement,
     setAppBarElement,
+    setStatusBarElement,
     onTerminate: onTerminate,
     onHide,
     onMaximize: maximize,
@@ -126,6 +132,13 @@ const AppWindow = React.memo((props: IAppProps) => {
   useClickAway(programRef, () => {
     dispatch(updateAppStatus([app, { isFOREGROUND: false }]))
   })
+
+  useEffect(() => {
+    dispatch(setStatusBar(StatusBarElement))
+    return () => { }
+  }, [StatusBarElement])
+
+
   return (
     <AppContext.Provider value={appContextValues}>
       <Draggable
@@ -145,6 +158,7 @@ const AppWindow = React.memo((props: IAppProps) => {
           ref={programRef}
           onClick={() => {
             dispatch(updateAppStatus([app, { isFOREGROUND: true }]))
+            dispatch(setStatusBar(StatusBarElement))
           }}
         >
           <Resizable

@@ -1,12 +1,14 @@
 import React, { useEffect } from "react"
 import { useAppContext } from "src/core/components/app-window/appContext"
 import FinderAppBar from "./FInderAppBar"
+import FinderStatusBar from "./FinderStatusBar"
 
 const Finder = () => {
-  const { setAppBarElement } = useAppContext()
+  const { setAppBarElement, setStatusBarElement } = useAppContext()
   useEffect(() => {
     setAppBarElement(FinderAppBar)
-    return () => {}
+    setStatusBarElement(<FinderStatusBar />)
+    return () => { }
   }, [])
   return <div>Finder</div>
 }
