@@ -3,7 +3,7 @@ import AppControl from "src/core/components/app-window/AppControl"
 
 const SystemPreferencesAppBar = () => {
   return (
-    <div className="w-full h-12 bg-white rounded-tl-lg rounded-tr-lg flex items-center justify-between px-4">
+    <div className="w-full h-12 bg-white flex items-center justify-between px-4">
       <div className="control flex items-center gap-2">
         <AppControl />
       </div>

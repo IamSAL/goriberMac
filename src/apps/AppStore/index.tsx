@@ -2,11 +2,12 @@ import React, { useEffect } from "react"
 import { useAppContext } from "src/core/components/app-window/appContext"
 import AppStoreAppBar from "./AppStoreAppBar"
 
+
 const AppStore = () => {
-  const { setAppBarElement } = useAppContext()
+  const { setAppBarElement, setStatusBarElement } = useAppContext()
   useEffect(() => {
     setAppBarElement(AppStoreAppBar)
-    return () => {}
+    return () => { }
   }, [])
   return <div>App Store</div>
 }

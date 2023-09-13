@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import Draggable from "react-draggable"
 import { Resizable } from "re-resizable"
 
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
 import { updateAppStatus, terminateApp, setStatusBar } from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
+import CommonStatusBar from "src/misc/trials/CommonStatusBar"
 
 
 const defaultHeight = 480
@@ -21,6 +22,8 @@ const AppBody = React.memo(
   ({ component, ...props }: any) => component(props),
   () => true
 )
+
+
 
 interface IAppProps {
   app: IApp
@@ -46,7 +49,7 @@ const AppWindow = React.memo((props: IAppProps) => {
   const [disk] = useState(initDisk(app.id, app.metadata.version || 1))
 
   const [AppBarElement, setAppBarElement] = useState(<></>)
-  const [StatusBarElement, setStatusBarElement] = useState(<></>)
+  const [StatusBarElement, setStatusBarElement] = useState<JSX.Element | null>(null)
   const [isResizing, setisResizing] = useState(false)
 
   const [dimensions, updateDimensions] = useState({
@@ -119,6 +122,8 @@ const AppWindow = React.memo((props: IAppProps) => {
     dispatch(updateAppStatus([app, { isMAXIMIZED: false, isHidden: true }]))
   }
 
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const appContextValues: IAppContext = {
     app,
     AppBarElement,
@@ -129,14 +134,24 @@ const AppWindow = React.memo((props: IAppProps) => {
     onMaximize: maximize,
     onMinimize: minimize,
   }
+
   useClickAway(programRef, () => {
     dispatch(updateAppStatus([app, { isFOREGROUND: false }]))
   })
 
+  const injectAppContextToStatusBar = useCallback(() => {
+    if (app.status.isFOREGROUND) {
+      dispatch(setStatusBar(<AppContext.Provider value={appContextValues}>
+        {StatusBarElement || <CommonStatusBar />}
+      </AppContext.Provider>))
+    }
+  }, [StatusBarElement, appContextValues, dispatch, app])
+
+
   useEffect(() => {
-    dispatch(setStatusBar(StatusBarElement))
+    injectAppContextToStatusBar();
     return () => { }
-  }, [StatusBarElement])
+  }, [injectAppContextToStatusBar])
 
 
   return (
@@ -158,7 +173,7 @@ const AppWindow = React.memo((props: IAppProps) => {
           ref={programRef}
           onClick={() => {
             dispatch(updateAppStatus([app, { isFOREGROUND: true }]))
-            dispatch(setStatusBar(StatusBarElement))
+            injectAppContextToStatusBar();
           }}
         >
           <Resizable
