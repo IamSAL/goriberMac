@@ -17,7 +17,7 @@ import StatusBarSystem from "./StatusBarSystem"
 const StatusBar = () => {
   const { isTouchingTop } = useMousePosition({ offsetTop: 20, offsetBottom: 0 })
   const { isMaximized } = useSelector((state: AppState) => state.system)
-  const currentStatusBar = useSelector((state: AppState) => state.memory.statusBar)
+  const currentStatusBar = useSelector((state: AppState) => state.memory.activeAppContext?.StatusBarElement)
   const isStatusBarHovered = false
   const shouldShow = isTouchingTop || !isMaximized || isStatusBarHovered
 

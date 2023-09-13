@@ -7,7 +7,7 @@ import { terminateApp, updateAppStatus } from 'src/core/redux/memory/memory.slic
 
 const WindowMenu = () => {
 
-  const { app, onTerminate, onHide } = useAppContext();
+  const { app, onTerminate, onHide } = useActiveAppContext();
 
 
   return (

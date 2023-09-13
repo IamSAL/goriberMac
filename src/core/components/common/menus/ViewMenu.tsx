@@ -4,7 +4,7 @@ import StatusBarItem from '../../status-bar/StatusBarItem';
 import { useAppContext } from '../../app-window/appContext';
 
 const ViewMenu = () => {
-  const { onMaximize } = useAppContext()
+  const { onMaximize } = useActiveAppContext()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

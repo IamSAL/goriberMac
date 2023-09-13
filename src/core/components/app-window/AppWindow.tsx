@@ -10,7 +10,7 @@ import StatusBar from "../status-bar/StatusBar"
 import { AppContext, IAppContext } from "./appContext"
 import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
-import { updateAppStatus, terminateApp, setStatusBar } from "src/core/redux/memory/memory.slice"
+import { updateAppStatus, terminateApp, setStatusBar, setActiveAppContext } from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
 import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 
@@ -133,25 +133,37 @@ const AppWindow = React.memo((props: IAppProps) => {
     onHide,
     onMaximize: maximize,
     onMinimize: minimize,
+    StatusBarElement
   }
 
   useClickAway(programRef, () => {
     dispatch(updateAppStatus([app, { isFOREGROUND: false }]))
   })
 
-  const injectAppContextToStatusBar = useCallback(() => {
-    if (app.status.isFOREGROUND) {
-      dispatch(setStatusBar(<AppContext.Provider value={appContextValues}>
-        {StatusBarElement || <CommonStatusBar />}
-      </AppContext.Provider>))
-    }
-  }, [StatusBarElement, appContextValues, dispatch, app])
+  // const injectAppContextToStatusBar = useCallback(() => {
+  //   if (app.status.isFOREGROUND) {
+  //     dispatch(setStatusBar(<AppContext.Provider value={appContextValues}>
+  //       {StatusBarElement || <CommonStatusBar />}
+  //     </AppContext.Provider>))
+  //   }
+  // }, [StatusBarElement, appContextValues, dispatch, app])
 
+
+  // useEffect(() => {
+  //   injectAppContextToStatusBar();
+  //   return () => { }
+  // }, [injectAppContextToStatusBar])
 
   useEffect(() => {
-    injectAppContextToStatusBar();
-    return () => { }
-  }, [injectAppContextToStatusBar])
+
+    if (app.status.isFOREGROUND) {
+      dispatch(setActiveAppContext(appContextValues))
+    }
+    return () => {
+
+    }
+  }, [appContextValues, app, StatusBarElement])
+
 
 
   return (
@@ -173,7 +185,7 @@ const AppWindow = React.memo((props: IAppProps) => {
           ref={programRef}
           onClick={() => {
             dispatch(updateAppStatus([app, { isFOREGROUND: true }]))
-            injectAppContextToStatusBar();
+            dispatch(setActiveAppContext(appContextValues))
           }}
         >
           <Resizable

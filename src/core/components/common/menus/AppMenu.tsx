@@ -7,7 +7,7 @@ import { AppState } from 'src/core/redux/redux'
 import { updateAppStatus } from 'src/core/redux/memory/memory.slice'
 
 const AppMenu = () => {
-  const { onTerminate, app, onHide } = useAppContext()
+  const { onTerminate, app, onHide } = useActiveAppContext()
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   const dispatch = useDispatch();
   const showAllApps = () => {
