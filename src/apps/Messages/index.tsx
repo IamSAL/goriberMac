@@ -1,12 +1,14 @@
 import React, { useEffect } from "react"
 import { useAppContext } from "src/core/components/app-window/appContext"
 import MessagesAppBar from "./MessagesAppBar"
+import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 
 const Messages = () => {
-  const { setAppBarElement } = useAppContext()
+  const { setAppBarElement, setStatusBarElement } = useAppContext()
   useEffect(() => {
     setAppBarElement(MessagesAppBar)
-    return () => {}
+    setStatusBarElement(<CommonStatusBar />)
+    return () => { }
   }, [])
   return <div>Messages</div>
 }

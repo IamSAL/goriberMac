@@ -18,6 +18,7 @@ const StatusBar = () => {
   const { isTouchingTop } = useMousePosition({ offsetTop: 20, offsetBottom: 0 })
   const { isMaximized } = useSelector((state: AppState) => state.system)
   const currentStatusBar = useSelector((state: AppState) => state.memory.activeAppContext?.StatusBarElement)
+  const runningApps = useSelector((state: AppState) => state.memory.appsInstances)
   const isStatusBarHovered = false
   const shouldShow = isTouchingTop || !isMaximized || isStatusBarHovered
 
@@ -30,7 +31,7 @@ const StatusBar = () => {
     >
       <div className="LeftSide flex align-middle gap-0">
         <StatusBarSystem />
-        {currentStatusBar}
+        {runningApps.length > 0 ? currentStatusBar : null}
       </div>
       <div className={cn(`RightSide flex align-middle gap-0 `, styles.RightSide)}>
         <StatusBarItem type="icon" icon={<IconMoon color="white" fontSize={"26px"} />} />

@@ -1,10 +1,10 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@components/ui/dropdown-menu'
 import React from 'react'
 import StatusBarItem from '../../status-bar/StatusBarItem'
-import { useAppContext } from '../../app-window/appContext'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'src/core/redux/redux'
 import { updateAppStatus } from 'src/core/redux/memory/memory.slice'
+import useActiveAppContext from 'src/helpers/hooks/useActiveAppContext'
 
 const AppMenu = () => {
   const { onTerminate, app, onHide } = useActiveAppContext()
@@ -25,7 +25,7 @@ const AppMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <StatusBarItem type="text" label={app?.name || ""} className="font-semibold px-1" />
+        <StatusBarItem type="text" label={app?.name || "s"} className="font-semibold px-1" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent >

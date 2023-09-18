@@ -7,12 +7,13 @@ import AppBar from "./AppBar"
 import { IApp } from "@types"
 import { initDisk, updateProgramData, getProgramData, cn, NumberUtil } from "@utils"
 import StatusBar from "../status-bar/StatusBar"
-import { AppContext, IAppContext } from "./appContext"
+import { AppContext, IAppContext, dummyContext } from "./appContext"
 import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
-import { updateAppStatus, terminateApp, setStatusBar, setActiveAppContext } from "src/core/redux/memory/memory.slice"
+import { updateAppStatus, terminateApp, setActiveAppContext } from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
 import CommonStatusBar from "src/core/components/common/CommonStatusBar"
+import useActiveAppContext from "src/helpers/hooks/useActiveAppContext"
 
 
 const defaultHeight = 480
@@ -109,6 +110,7 @@ const AppWindow = React.memo((props: IAppProps) => {
 
   //TODO: Theres no termination from window in MAC, mimic that.
   const onTerminate = () => {
+
     if (app.status.isMAXIMIZED) {
       dispatch(setMaximized(false))
     }
@@ -140,19 +142,6 @@ const AppWindow = React.memo((props: IAppProps) => {
     dispatch(updateAppStatus([app, { isFOREGROUND: false }]))
   })
 
-  // const injectAppContextToStatusBar = useCallback(() => {
-  //   if (app.status.isFOREGROUND) {
-  //     dispatch(setStatusBar(<AppContext.Provider value={appContextValues}>
-  //       {StatusBarElement || <CommonStatusBar />}
-  //     </AppContext.Provider>))
-  //   }
-  // }, [StatusBarElement, appContextValues, dispatch, app])
-
-
-  // useEffect(() => {
-  //   injectAppContextToStatusBar();
-  //   return () => { }
-  // }, [injectAppContextToStatusBar])
 
   useEffect(() => {
 
@@ -162,7 +151,7 @@ const AppWindow = React.memo((props: IAppProps) => {
     return () => {
 
     }
-  }, [appContextValues, app, StatusBarElement])
+  }, [appContextValues, app, StatusBarElement, dispatch])
 
 
 

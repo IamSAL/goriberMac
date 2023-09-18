@@ -1,7 +1,6 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSeparator, DropdownMenuTrigger } from '@components/ui/dropdown-menu';
 import React from 'react';
 import StatusBarItem from '../../status-bar/StatusBarItem';
-import { useAppContext } from '../../app-window/appContext';
 import useActiveAppContext from 'src/helpers/hooks/useActiveAppContext';
 
 const FileMenu = () => {

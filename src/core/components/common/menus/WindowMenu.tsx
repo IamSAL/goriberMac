@@ -4,6 +4,7 @@ import StatusBarItem from '../../status-bar/StatusBarItem';
 import { useAppContext } from '../../app-window/appContext';
 import { useDispatch } from 'react-redux';
 import { terminateApp, updateAppStatus } from 'src/core/redux/memory/memory.slice';
+import useActiveAppContext from 'src/helpers/hooks/useActiveAppContext';
 
 const WindowMenu = () => {
 

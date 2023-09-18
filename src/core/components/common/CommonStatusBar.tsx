@@ -20,7 +20,6 @@ const CommonStatusBar = () => {
       <ViewMenu />
       <WindowMenu />
       <HelpMenu />
-
     </Fragment>
   )
 }

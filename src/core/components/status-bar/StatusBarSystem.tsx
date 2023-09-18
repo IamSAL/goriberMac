@@ -19,6 +19,7 @@ import Image from "next/image"
 import { useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import AppLauncher from "../common/AppLauncher"
+import useActiveAppContext from "src/helpers/hooks/useActiveAppContext"
 // import TfiAngleRight from "react-icons/tfi"
 
 const StatusBarSystem = () => {
@@ -27,6 +28,7 @@ const StatusBarSystem = () => {
     <DropdownMenu>
       <DropdownMenuTrigger >
         <StatusBarItem type="icon" icon="/static/images/icons/icons-system-icon.svg" />
+
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-2 mx-2">
         <DropdownMenuItem>About this Mac</DropdownMenuItem>

@@ -38,6 +38,7 @@ export const memorySlice = createSlice({
       }
     },
     setActiveAppContext: (state, action: PayloadAction<IAppContext>) => {
+      console.log("active app context changed", action.payload.app?.name)
       return {
         ...state,
         activeAppContext: action.payload,
