@@ -10,11 +10,14 @@ import StatusBar from "../status-bar/StatusBar"
 import { AppContext, IAppContext, dummyContext } from "./appContext"
 import { useDispatch } from "react-redux"
 import { setMaximized } from "src/core/redux/system/system.slice"
-import { updateAppStatus, terminateApp, setActiveAppContext } from "src/core/redux/memory/memory.slice"
+import {
+  updateAppStatus,
+  terminateApp,
+  setActiveAppContext,
+} from "src/core/redux/memory/memory.slice"
 import { useClickAway } from "react-use"
 import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 import useActiveAppContext from "src/helpers/hooks/useActiveAppContext"
-
 
 const defaultHeight = 480
 const defaultWidth = 640
@@ -23,8 +26,6 @@ const AppBody = React.memo(
   ({ component, ...props }: any) => component(props),
   () => true
 )
-
-
 
 interface IAppProps {
   app: IApp
@@ -63,8 +64,6 @@ const AppWindow = React.memo((props: IAppProps) => {
     style: { height: initWindowHeight, width: initWindowWidth },
   })
   const [oldDimensions, setoldDimensions] = useState(dimensions)
-
-
 
   const handleDrag = (e, ui) => {
     console.log({ ui })
@@ -110,7 +109,6 @@ const AppWindow = React.memo((props: IAppProps) => {
 
   //TODO: Theres no termination from window in MAC, mimic that.
   const onTerminate = () => {
-
     if (app.status.isMAXIMIZED) {
       dispatch(setMaximized(false))
     }
@@ -124,7 +122,6 @@ const AppWindow = React.memo((props: IAppProps) => {
     dispatch(updateAppStatus([app, { isMAXIMIZED: false, isHidden: true }]))
   }
 
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const appContextValues: IAppContext = {
     app,
@@ -135,25 +132,19 @@ const AppWindow = React.memo((props: IAppProps) => {
     onHide,
     onMaximize: maximize,
     onMinimize: minimize,
-    StatusBarElement
+    StatusBarElement,
   }
 
   useClickAway(programRef, () => {
     dispatch(updateAppStatus([app, { isFOREGROUND: false }]))
   })
 
-
   useEffect(() => {
-
     if (app.status.isFOREGROUND) {
       dispatch(setActiveAppContext(appContextValues))
     }
-    return () => {
-
-    }
+    return () => {}
   }, [appContextValues, app, StatusBarElement, dispatch])
-
-
 
   return (
     <AppContext.Provider value={appContextValues}>
@@ -178,9 +169,11 @@ const AppWindow = React.memo((props: IAppProps) => {
           }}
         >
           <Resizable
-            className={`border-white ${app.status.isMAXIMIZED ? "rounded-[0px]" : "rounded-[10px]"
-              }  shadow-lg  bg-white dark:bg-black backdrop-blur-md bg-opacity-50 dark:bg-opacity-50 overflow-hidden transition-all duration-75  ${isResizing ? "border-0" : ""
-              }`}
+            className={`border-white ${
+              app.status.isMAXIMIZED ? "rounded-[0px]" : "rounded-[10px]"
+            }  shadow-lg flex flex-col  bg-white dark:bg-black backdrop-blur-md bg-opacity-50 dark:bg-opacity-50 overflow-hidden transition-all duration-75  ${
+              isResizing ? "border-0" : ""
+            }`}
             onResizeStart={() => setisResizing(true)}
             size={{ width: dimensions.style.width, height: dimensions.style.height }}
             onResizeStop={handleResize}
