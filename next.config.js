@@ -8,4 +8,4 @@ const withPWA = require("next-pwa")
  **/
 const config = {}
 
-module.exports = withPWA(withBlitz(withSVGr(config)))
+module.exports = withBlitz(withSVGr(withPWA(config)))
