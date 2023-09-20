@@ -13,7 +13,10 @@ const VsCode = () => {
     setStatusBarElement(<VsCodeStatusBar />)
     return () => { }
   }, [])
-  return <div>Vs code</div>
+  return <div>
+
+    <iframe src="https://github.dev/IamSAL/goriberMac"></iframe>
+  </div>
 }
 
 export default VsCode
