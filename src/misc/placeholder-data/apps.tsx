@@ -15,6 +15,7 @@ import Photos from "src/apps/Photos"
 import Safari from "src/apps/Safari"
 import SystemPreferences from "src/apps/SystemPreferences"
 import VsCode from "src/apps/VsCode"
+import WidgetsEditor from "src/apps/WidgetsEditor"
 
 
 
@@ -272,6 +273,27 @@ export const apps: IApp[] = [
       isDefault: true,
       isPinned: false,
       template: IAppTemplate.WINDOW,
+    },
+  },
+  {
+    id: 12,
+    name: "Widgets",
+    icon: "/static/images/icons/app-icons-launchpad.svg",
+    status: {},
+    metadata: {
+      title: "Widgets", // The title of the app
+      description: "System default launcher", // A short description or tooltip
+      version: "0.0.1", // App version number
+    },
+    component: WidgetsEditor,
+    config: {
+      initTitle: "Widgets",
+      initWindowWidth: 640,
+      initWindowHeight: 480,
+      startMaximized: true,
+      isDefault: true,
+      isPinned: false,
+      template: IAppTemplate.IMMERSIVE,
     },
   },
 ]

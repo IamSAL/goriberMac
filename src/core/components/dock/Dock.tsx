@@ -11,9 +11,11 @@ const Dock = () => {
   const { isTouchingBottom } = useMousePosition({ offsetTop: 0, offsetBottom: 100 })
   const { isMaximized } = useSelector((state: AppState) => state.system)
   const isDockHovered = false
-  const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
 
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
+  const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
+
+
   const allDockApps = runningApps
     .concat(apps.filter((app) => app.config.isDefault || app.config.isPinned))
     .filter((app, index, self) => self.findIndex((tempApp) => tempApp.id === app.id) === index)

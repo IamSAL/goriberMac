@@ -3,6 +3,7 @@ import React, { Children } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { startApp, terminateApp, updateAppStatus } from "src/core/redux/memory/memory.slice"
 import { AppState } from "src/core/redux/redux"
+import { setMaximized } from "src/core/redux/system/system.slice"
 import { apps } from "src/misc/placeholder-data/apps"
 
 export interface IAppLauncherProps {
@@ -28,6 +29,7 @@ const AppLauncher = ({ children, appId }: IAppLauncherProps) => {
           runningApps.forEach((runningApp) => {
             if (runningApp.config.template === IAppTemplate.IMMERSIVE) {
               dispatch(terminateApp(runningApp.id))
+              // dispatch(setMaximized(false))
             }
           })
         default:
