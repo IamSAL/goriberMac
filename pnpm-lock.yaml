@@ -19,6 +19,7 @@ specifiers:
   "@testing-library/jest-dom": 5.16.5
   "@testing-library/react": 13.4.0
   "@testing-library/react-hooks": 8.0.1
+  "@types/chance": 1.1.4
   "@types/node": 18.11.9
   "@types/preview-email": 2.0.1
   "@types/react": 18.0.25
@@ -26,6 +27,7 @@ specifiers:
   "@vitejs/plugin-react": 2.2.0
   autoprefixer: 10.x
   blitz: 2.0.0-beta.32
+  chance: 1.1.11
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   eslint: 8.27.0
@@ -80,8 +82,10 @@ dependencies:
   "@radix-ui/react-tooltip": 1.0.6_2zx2umvpluuhvlq44va5bta2da
   "@reduxjs/toolkit": 1.9.5_nnem43rer6rxr5uhc4j6bxdlmm
   "@svgr/webpack": 8.1.0_typescript@4.9.5
+  "@types/chance": 1.1.4
   autoprefixer: 10.4.15_postcss@8.4.29
   blitz: 2.0.0-beta.32_t2onre2iphfojnae77env6h7am
+  chance: 1.1.11
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   framer-motion: 10.16.4_biqbaboplfbrettd7655fr4n2y
@@ -5047,6 +5051,13 @@ packages:
       }
     dev: true
 
+  /@types/chance/1.1.4:
+    resolution:
+      {
+        integrity: sha512-et3alUWI9jEPnGai+QRCyDdRMYS+atq32IaldWURyxPRZBYg+cSwppxK2UHnDv9X/0pdoxR3Ufbz5hRmjD/uNg==,
+      }
+    dev: false
+
   /@types/connect/3.4.36:
     resolution:
       {
@@ -6733,6 +6744,13 @@ packages:
         integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==,
       }
     engines: { node: ^12.17.0 || ^14.13 || >=16.0.0 }
+    dev: false
+
+  /chance/1.1.11:
+    resolution:
+      {
+        integrity: sha512-kqTg3WWywappJPqtgrdvbA380VoXO2eu9VCV895JgbyHsaErXdyHK9LOZ911OvAk6L0obK7kDk9CGs8+oBawVA==,
+      }
     dev: false
 
   /character-parser/2.2.0:

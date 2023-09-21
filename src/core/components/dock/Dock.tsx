@@ -16,7 +16,9 @@ const Dock = () => {
   const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
 
   const allDockApps = runningApps
-    .concat(apps.filter((app) => app.config.isDefault || app.config.isPinned))
+    .concat(
+      apps.filter((app) => (app.config.isDefault || app.config.isPinned) && !app.config.isHidden)
+    )
     .filter((app, index, self) => self.findIndex((tempApp) => tempApp.id === app.id) === index)
     .sort((a, b) => a.id - b.id)
 

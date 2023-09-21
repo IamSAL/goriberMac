@@ -16,8 +16,55 @@ import Safari from "src/apps/Safari"
 import SystemPreferences from "src/apps/SystemPreferences"
 import VsCode from "src/apps/VsCode"
 import WidgetsEditor from "src/apps/WidgetsEditor"
+import WidgetWeather from "src/core/components/widgets-bar/WidgetWeather"
+import { generateRandomWidgets } from "./generators"
 
 export const apps: IApp[] = [
+  {
+    id: 13,
+    name: "Weather",
+    icon: "/static/images/icons/ios-weather.svg",
+    status: {},
+    metadata: {
+      title: "Weather", // The title of the app
+      description: "Weather.com forecasts", // A short description or tooltip
+      version: "0.0.1", // App version number
+    },
+    component: WidgetsEditor,
+    config: {
+      isHidden: true,
+      initTitle: "Weather",
+      initWindowWidth: 640,
+      initWindowHeight: 480,
+      startMaximized: true,
+      isDefault: true,
+      isPinned: false,
+      template: IAppTemplate.WEBVIEW,
+    },
+    widgets: [
+      {
+        name: "Forecast",
+        description: "See a compact view of current weather",
+        component: WidgetWeather,
+        appId: 13,
+        multiSized: true,
+      },
+      {
+        name: "How's Temp",
+        description: "See a compact view of temperature forecast.",
+        component: WidgetWeather,
+        appId: 13,
+        multiSized: true,
+      },
+      {
+        name: "Weather Details",
+        description: "See a compact view of current weather",
+        component: WidgetWeather,
+        appId: 13,
+        multiSized: true,
+      },
+    ],
+  },
   {
     id: 0,
     name: "Finder",
@@ -30,7 +77,7 @@ export const apps: IApp[] = [
     },
     component: Finder,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Finder",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -52,7 +99,7 @@ export const apps: IApp[] = [
     },
     component: LaunchPad,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -75,7 +122,7 @@ export const apps: IApp[] = [
     },
     component: AppStore,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -97,7 +144,7 @@ export const apps: IApp[] = [
     },
     component: Mail,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -106,6 +153,7 @@ export const apps: IApp[] = [
       isPinned: false,
       template: IAppTemplate.WINDOW,
     },
+    widgets: generateRandomWidgets(4, 3),
   },
   {
     id: 4,
@@ -119,7 +167,7 @@ export const apps: IApp[] = [
     },
     component: Safari,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 800,
       initWindowHeight: 500,
@@ -128,6 +176,7 @@ export const apps: IApp[] = [
       isPinned: false,
       template: IAppTemplate.WINDOW,
     },
+    widgets: generateRandomWidgets(7, 4),
   },
   {
     id: 5,
@@ -142,7 +191,7 @@ export const apps: IApp[] = [
     },
     component: Photos,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -151,6 +200,7 @@ export const apps: IApp[] = [
       isPinned: false,
       template: IAppTemplate.WINDOW,
     },
+    widgets: generateRandomWidgets(2, 5),
   },
   {
     id: 6,
@@ -164,7 +214,7 @@ export const apps: IApp[] = [
     },
     component: SystemPreferences,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -186,7 +236,7 @@ export const apps: IApp[] = [
     },
     component: Calendar,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -195,6 +245,7 @@ export const apps: IApp[] = [
       isPinned: true,
       template: IAppTemplate.WINDOW,
     },
+    widgets: generateRandomWidgets(3, 7),
   },
   {
     id: 8,
@@ -208,7 +259,7 @@ export const apps: IApp[] = [
     },
     component: Messages,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -217,6 +268,7 @@ export const apps: IApp[] = [
       isPinned: false,
       template: IAppTemplate.WINDOW,
     },
+    widgets: generateRandomWidgets(2, 8),
   },
   {
     id: 9,
@@ -230,7 +282,7 @@ export const apps: IApp[] = [
     },
     component: Maps,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Maps",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -252,7 +304,7 @@ export const apps: IApp[] = [
     },
     component: Contacts,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Contacts",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -275,10 +327,10 @@ export const apps: IApp[] = [
     },
     component: VsCode,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Vs code",
-      initWindowWidth: 640,
-      initWindowHeight: 480,
+      initWindowWidth: 927,
+      initWindowHeight: 652,
       startMaximized: true,
       isDefault: true,
       isPinned: false,
