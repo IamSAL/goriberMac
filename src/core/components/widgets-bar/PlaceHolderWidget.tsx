@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { WidgetProps } from "@types"
 import { cn } from "@utils"
 import { CloudCog, CloudDrizzle, CloudDrizzleIcon, CloudFog, CloudLightning } from "lucide-react"
@@ -42,10 +43,10 @@ const PlaceHolderWidget = ({ size = "L", className }: WidgetProps) => {
     }
   }
 
-  const chance = new Chance()
-
+  const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <div
+      ref={animeParent}
       className={cn(
         "relative flex-shrink-0 bg-gradient-to-b to-[#3d3d3d] from-[#0a0b0c] rounded-2xl shadow p-4 ",
         className,

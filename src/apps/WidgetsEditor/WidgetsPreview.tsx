@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { IWidget } from "@types"
 import { cn } from "@utils"
 import Chance from "chance"
@@ -16,6 +17,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
   const [selectedSize, setselectedSize] = useState<"S" | "M" | "L" | string>(
     chance.pickone(["S", "M", "L"])
   )
+  const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <div className="Item1 w-72 h-[450px] p-5 bg-white bg-opacity-10 rounded-2xl flex-col justify-start items-center  inline-flex">
       <div className="TextContent w-64 h-10 flex-col justify-start items-start gap-1 inline-flex">
@@ -26,7 +28,10 @@ const WidgetsPreview = ({ widget }: TProps) => {
           {description}
         </div>
       </div>
-      <div className={cn("w-80 h-96 flex justify-center items-center scale-75 overflow-hidden")}>
+      <div
+        className={cn("w-80 h-96 flex justify-center items-center scale-75 overflow-hidden")}
+        ref={animeParent}
+      >
         {<WidgetBody component={component} size={selectedSize} />}
       </div>
 

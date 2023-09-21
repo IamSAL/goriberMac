@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { WidgetProps } from "@types"
 import { cn } from "@utils"
 import { CloudCog, CloudDrizzle, CloudDrizzleIcon, CloudFog, CloudLightning } from "lucide-react"
@@ -122,10 +123,12 @@ const WidgetWeather = ({ size = "L", className }: WidgetProps) => {
         break
     }
   }
+
+  const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <div
       className={cn(
-        "relative flex-shrink-0 bg-gradient-to-b to-[#3d3d3d] from-[#0a0b0c] rounded-2xl shadow p-4 ",
+        "relative flex-shrink-0 bg-gradient-to-b to-[#3d3d3d] from-[#0a0b0c] rounded-2xl shadow p-4 overflow-hidden",
         className,
         {
           "WidgetsSmall w-40 h-40": size === "S",
@@ -133,6 +136,7 @@ const WidgetWeather = ({ size = "L", className }: WidgetProps) => {
           "WidgetsLarge w-80 h-80": size === "L",
         }
       )}
+      ref={animeParent}
     >
       {getWidget()}
     </div>
