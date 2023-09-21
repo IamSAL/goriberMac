@@ -1,6 +1,6 @@
 import { ErrorFallbackProps, ErrorComponent, ErrorBoundary, AppProps } from "@blitzjs/next"
 import { AuthenticationError, AuthorizationError } from "blitz"
-import React from "react"
+import React, { useEffect } from "react"
 import { withBlitz } from "src/blitz-client"
 import "src/styles/globals.scss"
 import "src/core/styles/index.scss"
@@ -33,6 +33,12 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const loader = document.getElementById("globalLoader")
+      if (loader) loader.remove()
+    }
+  }, [])
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
