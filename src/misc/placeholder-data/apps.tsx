@@ -339,8 +339,8 @@ export const apps: IApp[] = [
   },
   {
     id: 12,
-    name: "Widgets",
-    icon: "/static/images/icons/app-icons-launchpad.svg",
+    name: "Widgets Editor",
+    icon: "/static/images/icons/widget-icon.png",
     status: {},
     metadata: {
       title: "Widgets", // The title of the app
@@ -349,7 +349,7 @@ export const apps: IApp[] = [
     },
     component: WidgetsEditor,
     config: {
-      isHidden: true,
+      isHidden: false,
       initTitle: "Widgets",
       initWindowWidth: 640,
       initWindowHeight: 480,
