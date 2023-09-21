@@ -147,7 +147,7 @@ const AppWindow = React.memo((props: IAppProps) => {
   }, [appContextValues, app, StatusBarElement, dispatch])
 
   useEffect(() => {
-    programRef.current?.focus()
+    //programRef.current?.focus()
   }, [programRef])
 
   return (

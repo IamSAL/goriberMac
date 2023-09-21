@@ -23,7 +23,7 @@ const WidgetsEditor = () => {
   )
 
   useEffect(() => {
-    programRef.current?.focus()
+    //programRef.current?.focus()
   }, [programRef])
 
   return (

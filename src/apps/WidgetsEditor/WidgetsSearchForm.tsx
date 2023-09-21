@@ -33,7 +33,7 @@ const WidgetsSearchForm = () => {
   return (
     <div className=" p-8">
       <div className="">
-        <form className="flex items-center">
+        <form className="flex items-center" action="#">
           <label htmlFor="voice-search" className="sr-only">
             Search
           </label>
