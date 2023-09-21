@@ -9,11 +9,10 @@ import { AppState } from "src/core/redux/redux"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@components/ui/tooltip"
 import { TooltipPortal, TooltipArrow } from "@radix-ui/react-tooltip"
 
-
-
 type TDockItemProps = {
   app: IApp
 }
+
 const DockItem = ({ app }: TDockItemProps) => {
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   const runningInstance = runningApps.find((instance) => instance.id === app.id)

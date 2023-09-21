@@ -39,7 +39,7 @@ const LaunchPad = () => {
           </form>
         </div>
         <div className="apps grid gap-10 grid-cols-7">
-          {apps.map((app, idx) => {
+          {apps?.map((app, idx) => {
             return (
               <AppLauncher key={app.id} appId={app.id}>
                 <div

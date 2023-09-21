@@ -17,8 +17,6 @@ import SystemPreferences from "src/apps/SystemPreferences"
 import VsCode from "src/apps/VsCode"
 import WidgetsEditor from "src/apps/WidgetsEditor"
 
-
-
 export const apps: IApp[] = [
   {
     id: 0,
@@ -32,6 +30,7 @@ export const apps: IApp[] = [
     },
     component: Finder,
     config: {
+      isHidden: true,
       initTitle: "Finder",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -53,6 +52,7 @@ export const apps: IApp[] = [
     },
     component: LaunchPad,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -75,6 +75,7 @@ export const apps: IApp[] = [
     },
     component: AppStore,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -96,6 +97,7 @@ export const apps: IApp[] = [
     },
     component: Mail,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -117,6 +119,7 @@ export const apps: IApp[] = [
     },
     component: Safari,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 800,
       initWindowHeight: 500,
@@ -139,6 +142,7 @@ export const apps: IApp[] = [
     },
     component: Photos,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -160,6 +164,7 @@ export const apps: IApp[] = [
     },
     component: SystemPreferences,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -181,6 +186,7 @@ export const apps: IApp[] = [
     },
     component: Calendar,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -202,6 +208,7 @@ export const apps: IApp[] = [
     },
     component: Messages,
     config: {
+      isHidden: true,
       initTitle: "Launchpad",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -223,6 +230,7 @@ export const apps: IApp[] = [
     },
     component: Maps,
     config: {
+      isHidden: true,
       initTitle: "Maps",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -244,6 +252,7 @@ export const apps: IApp[] = [
     },
     component: Contacts,
     config: {
+      isHidden: true,
       initTitle: "Contacts",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -266,6 +275,7 @@ export const apps: IApp[] = [
     },
     component: VsCode,
     config: {
+      isHidden: true,
       initTitle: "Vs code",
       initWindowWidth: 640,
       initWindowHeight: 480,
@@ -287,6 +297,7 @@ export const apps: IApp[] = [
     },
     component: WidgetsEditor,
     config: {
+      isHidden: true,
       initTitle: "Widgets",
       initWindowWidth: 640,
       initWindowHeight: 480,

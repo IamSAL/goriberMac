@@ -1,4 +1,4 @@
-import React, { } from "react"
+import React from "react"
 import StatusBarItem from "./StatusBarItem"
 import {
   DropdownMenu,
@@ -26,18 +26,18 @@ const StatusBarSystem = () => {
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger >
+      <DropdownMenuTrigger>
         <StatusBarItem type="icon" icon="/static/images/icons/icons-system-icon.svg" />
-
       </DropdownMenuTrigger>
       <DropdownMenuContent className="px-2 mx-2">
         <DropdownMenuItem>About this Mac</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>System Preferences...</DropdownMenuItem>
-        <DropdownMenuItem><div className="flex justify-between gap-28 w-full">
-          <div className="">App Store...</div>
-          <div className="text-[11px] bg-slate-600 p-[2px] px-2 rounded-full">5 updates</div>
-        </div>
+        <DropdownMenuItem>
+          <div className="flex justify-between gap-28 w-full">
+            <div className="">App Store...</div>
+            <div className="text-[11px] bg-slate-600 p-[2px] px-2 rounded-full">5 updates</div>
+          </div>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
@@ -49,9 +49,9 @@ const StatusBarSystem = () => {
               <DropdownMenuSubContent>
                 <DropdownMenuLabel>Applications</DropdownMenuLabel>
 
-                {
-                  runningApps.map(app => {
-                    return <DropdownMenuItem key={app.id}>
+                {runningApps?.map((app) => {
+                  return (
+                    <DropdownMenuItem key={app.id}>
                       <AppLauncher appId={app.id}>
                         <div className="flex">
                           <Image src={app.icon} width={18} height={18} alt={app.name} />
@@ -59,16 +59,16 @@ const StatusBarSystem = () => {
                         </div>
                       </AppLauncher>
                     </DropdownMenuItem>
-                  })
-                }
+                  )
+                })}
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>Documents</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel>Servers</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem ><span>
-                  Clear menu</span></DropdownMenuItem>
-
+                <DropdownMenuItem>
+                  <span>Clear menu</span>
+                </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>

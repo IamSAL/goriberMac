@@ -37,6 +37,7 @@ export interface IApp {
   // UI and Layout
   component: () => JSX.Element // The React component that represents the app
   config: {
+    isHidden: boolean
     initTitle?: string // Initial window title
     initWindowWidth: number // Initial window width (e.g., "800px")
     initWindowHeight: number // Initial window height (e.g., "600px")

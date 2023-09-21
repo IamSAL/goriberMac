@@ -9,4 +9,9 @@ const withPWA = require("next-pwa")
  **/
 const config = {}
 
-module.exports = million.next(withBlitz(withSVGr(config)), { auto: true })
+module.exports = million.next(withBlitz(withSVGr(config)), {
+  auto: {
+    threshold: 0.25,
+    skip: [/Icon.*/g],
+  },
+})

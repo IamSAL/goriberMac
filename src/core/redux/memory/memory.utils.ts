@@ -11,7 +11,7 @@ export const updateAppsInstances = (data, app: IApp) => {
 
 export const updateAppStatuses = (prevApps: IApp[], app: IApp, newStatus: Partial<TAppStatus>) => {
   let newApps: IApp[] = JSON.parse(JSON.stringify(prevApps))
-  return newApps.map((instance) => {
+  return newApps?.map((instance) => {
     if (instance.id === app.id) {
       Object.assign(instance.status, newStatus)
     }

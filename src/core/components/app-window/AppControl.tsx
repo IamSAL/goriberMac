@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import { terminateApp } from "src/core/redux/memory/memory.slice"
 import { cn } from "@utils"
 
+// million-ignore
 const AppControl = () => {
   const { onTerminate, onMaximize, onMinimize, onHide, app } = useAppContext()
 

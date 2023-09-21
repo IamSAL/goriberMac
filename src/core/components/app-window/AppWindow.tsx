@@ -23,7 +23,7 @@ const defaultHeight = 480
 const defaultWidth = 640
 
 const AppBody = React.memo(
-  ({ component, ...props }: any) => component(props),
+  ({ component, ...props }: any) => component?.(props),
   () => true
 )
 
