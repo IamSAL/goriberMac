@@ -15,7 +15,7 @@ import {
   terminateApp,
   setActiveAppContext,
 } from "src/core/redux/memory/memory.slice"
-import { useClickAway } from "react-use"
+import { useClickAway, useEffectOnce } from "react-use"
 import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 import useActiveAppContext from "src/helpers/hooks/useActiveAppContext"
 
@@ -145,6 +145,10 @@ const AppWindow = React.memo((props: IAppProps) => {
     }
     return () => {}
   }, [appContextValues, app, StatusBarElement, dispatch])
+
+  useEffect(() => {
+    programRef.current?.focus()
+  }, [programRef])
 
   return (
     <AppContext.Provider value={appContextValues}>

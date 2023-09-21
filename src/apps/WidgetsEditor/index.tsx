@@ -1,5 +1,5 @@
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 // import IconSearch from '/src/assets/icons/System/Search.svg';
 import WidgetsSearchForm from "./WidgetsSearchForm"
 import WidgetsSearchResult from "./WidgetsSearchResult"
@@ -10,7 +10,7 @@ import { apps } from "src/misc/placeholder-data/apps"
 const WidgetsEditor = () => {
   const [searchTerm, setsearchTerm] = useState("")
   const [selectedAppId, setselectedAppId] = useState<number | undefined>()
-
+  const programRef = useRef(null)
   const matchedWidgets = apps
     .flatMap((app) => app.widgets || [])
     .filter(
@@ -21,6 +21,10 @@ const WidgetsEditor = () => {
   const matchedApps = apps.filter((app) =>
     matchedWidgets?.some((widget) => widget.appId === app.id)
   )
+
+  useEffect(() => {
+    programRef.current?.focus()
+  }, [programRef])
 
   return (
     <WidgetEditorContext.Provider
@@ -33,7 +37,12 @@ const WidgetsEditor = () => {
         matchedWidgets,
       }}
     >
-      <div className="w-full h-full relative overflow-hidden">
+      <div
+        className="w-full h-full relative overflow-hidden"
+        tabIndex={0}
+        ref={programRef}
+        role="dialog"
+      >
         <Image
           src="/static/images/wallpapers/dark.svg"
           className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"

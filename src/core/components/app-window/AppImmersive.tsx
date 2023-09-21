@@ -21,11 +21,9 @@ const AppImmersive = React.memo((props: IAppProps) => {
   const programRef = useRef(null)
   useKey("Escape", () => {
     dispatch(terminateApp(app.id))
-
   })
 
   useEffect(() => {
-
     dispatch(setMaximized(true))
     return () => {
       dispatch(setMaximized(false))
@@ -37,6 +35,11 @@ const AppImmersive = React.memo((props: IAppProps) => {
     app,
     onTerminate: () => dispatch(terminateApp(app.id)),
   }
+
+  useEffect(() => {
+    programRef.current?.focus()
+  }, [programRef])
+
   return (
     <AppContext.Provider value={appContextValues}>
       <div className=" h-screen w-screen z-[999] absolute top-0" ref={programRef}>
