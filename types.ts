@@ -19,6 +19,18 @@ export type TAppStatus = {
   isFOREGROUND: boolean
   isHidden: boolean
 }
+
+export type WidgetProps = {
+  size?: "S" | "M" | "L"
+  className?: string
+}
+export interface IWidget {
+  name: string
+  description: string
+  multiSized: boolean
+  component: (WidgetProps) => JSX.Element
+  appId?: number
+}
 export interface IApp {
   // Basic Information
   id: number
@@ -37,6 +49,7 @@ export interface IApp {
   // UI and Layout
   component: () => JSX.Element // The React component that represents the app
   config: {
+    isHidden: boolean
     initTitle?: string // Initial window title
     initWindowWidth: number // Initial window width (e.g., "800px")
     initWindowHeight: number // Initial window height (e.g., "600px")
@@ -45,14 +58,15 @@ export interface IApp {
     isDefault: boolean
     template: IAppTemplate
   }
-
   // Windows and Tabs (if applicable)
   windows?: IAppWindow[] // An array of open windows or tabs
+  widgets?: IWidget[]
 }
 
 export enum IAppTemplate {
   WINDOW,
   IMMERSIVE,
+  WEBVIEW,
 }
 
 // Interface for representing an app window or tab

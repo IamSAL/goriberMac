@@ -7,11 +7,12 @@ import AppLauncher from "../common/AppLauncher"
 import { useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@components/ui/tooltip"
-import { TooltipArrow, TooltipPortal } from "@radix-ui/react-tooltip"
+import { TooltipPortal, TooltipArrow } from "@radix-ui/react-tooltip"
 
 type TDockItemProps = {
   app: IApp
 }
+
 const DockItem = ({ app }: TDockItemProps) => {
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
   const runningInstance = runningApps.find((instance) => instance.id === app.id)
@@ -37,7 +38,7 @@ const DockItem = ({ app }: TDockItemProps) => {
           <TooltipPortal>
             <TooltipContent sideOffset={10}>
               {app.name}
-              <TooltipArrow />
+              <TooltipArrow className=" dark:opacity-40" />
             </TooltipContent>
           </TooltipPortal>
         </Tooltip>

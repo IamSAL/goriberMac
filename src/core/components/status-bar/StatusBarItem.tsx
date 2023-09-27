@@ -4,15 +4,15 @@ import React from "react"
 
 export type IStatusBarItemProps =
   | {
-      type: "text"
-      label: string
-      [x: string]: any
-    }
+    type: "text"
+    label: string
+    [x: string]: any
+  }
   | {
-      type: "icon"
-      icon: string | React.ReactElement
-      [x: string]: any
-    }
+    type: "icon"
+    icon: string | React.ReactElement
+    [x: string]: any
+  }
 
 const StatusBarItem = ({ className, ...props }: IStatusBarItemProps) => {
   const getBarItem = () => {
@@ -33,7 +33,7 @@ const StatusBarItem = ({ className, ...props }: IStatusBarItemProps) => {
   return (
     <div
       className={cn(
-        "text-center text-white text-xs  leading-none flex items-center hover:bg-white hover:bg-opacity-20 px-2 rounded-sm cursor-pointer focus:ring-0 active:ring-0",
+        "text-center text-white text-xs h-full leading-none flex items-center hover:bg-white hover:bg-opacity-20 px-2 rounded-sm cursor-pointer focus:ring-0 active:ring-0",
         className
       )}
     >

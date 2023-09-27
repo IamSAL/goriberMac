@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import StatusBarItem from "./StatusBarItem"
+import NiceModal from "@ebay/nice-modal-react"
+import { CONSTANTS } from "@constants"
 
 const StatusBarClock = () => {
   const [currentTime, setcurrentTime] = useState("")
@@ -13,7 +15,9 @@ const StatusBarClock = () => {
     }
   }, [])
 
-  return <StatusBarItem type="text" label={currentTime} className="min-w-[90px]" />
+  return <div onClick={async () => {
+    await NiceModal.show(CONSTANTS.MODALS.WIDGETS_BAR)
+  }}><StatusBarItem type="text" label={currentTime} className="min-w-[90px]" /></div>
 }
 
 export default StatusBarClock

@@ -1,12 +1,14 @@
 import React, { useEffect } from "react"
 import { useAppContext } from "src/core/components/app-window/appContext"
 import SafariAppBar from "./SafariAppBar"
+import CommonStatusBar from "src/core/components/common/CommonStatusBar"
 
 const Safari = () => {
-  const { setAppBarElement, app } = useAppContext()
+  const { setAppBarElement, setStatusBarElement } = useAppContext()
   useEffect(() => {
     setAppBarElement(SafariAppBar)
-    return () => {}
+    setStatusBarElement(<CommonStatusBar />)
+    return () => { }
   }, [])
 
   return <div>Safari</div>

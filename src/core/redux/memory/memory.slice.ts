@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IApp, TAppStatus } from "@types"
 import { updateAppsInstances, removeAppInstance, updateAppStatuses } from "./memory.utils"
+import { dummyContext, IAppContext } from "src/core/components/app-window/appContext"
 
 interface IMemoryState {
   appsInstances: Array<IApp>
+  activeAppContext?: IAppContext
 }
 const initialState: IMemoryState = {
   appsInstances: [],
+  activeAppContext: dummyContext,
 }
 
 export const memorySlice = createSlice({
@@ -34,8 +37,15 @@ export const memorySlice = createSlice({
         appsInstances: removeAppInstance(state.appsInstances, appId),
       }
     },
+    setActiveAppContext: (state, action: PayloadAction<IAppContext>) => {
+      console.log("active app context changed", action.payload.app?.name)
+      return {
+        ...state,
+        activeAppContext: action.payload,
+      }
+    },
   },
 })
 
-export const { startApp, terminateApp, updateAppStatus } = memorySlice.actions
+export const { startApp, terminateApp, updateAppStatus, setActiveAppContext } = memorySlice.actions
 export default memorySlice.reducer
