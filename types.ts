@@ -19,9 +19,9 @@ export type TAppStatus = {
   isFOREGROUND: boolean
   isHidden: boolean
 }
-
+export type ISizes = "S" | "M" | "L"
 export type WidgetProps = {
-  size?: "S" | "M" | "L"
+  size?: ISizes
   className?: string
 }
 export interface IWidget {

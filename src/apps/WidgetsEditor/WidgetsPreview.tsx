@@ -1,8 +1,10 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import { IWidget } from "@types"
+import { ISizes, IWidget } from "@types"
 import { cn } from "@utils"
 import Chance from "chance"
 import React, { useState } from "react"
+import { useDispatch } from "react-redux"
+import { addWidget } from "src/core/redux/system/system.slice"
 type TProps = {
   widget: IWidget
 }
@@ -13,10 +15,9 @@ const WidgetBody = ({ component, ...props }: any) => {
 
 const WidgetsPreview = ({ widget }: TProps) => {
   const chance = new Chance()
+  const dispatch = useDispatch()
   const { name, description, multiSized, component } = widget
-  const [selectedSize, setselectedSize] = useState<"S" | "M" | "L" | string>(
-    chance.pickone(["S", "M", "L"])
-  )
+  const [selectedSize, setselectedSize] = useState<ISizes>(chance.pickone(["S", "M", "L"]))
   const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <div className="Item1 w-72 h-[450px] p-5 bg-white bg-opacity-10 rounded-2xl flex-col justify-start items-center  inline-flex">
@@ -31,6 +32,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
       <div
         className={cn("w-80 h-96 flex justify-center items-center scale-75 overflow-hidden")}
         ref={animeParent}
+        onClick={() => dispatch(addWidget({ widget, size: selectedSize }))}
       >
         {<WidgetBody component={component} size={selectedSize} />}
       </div>
@@ -40,7 +42,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
           <div className="flex space-x-2">
             {["S", "M", "L"].map((s) => (
               <button
-                onClick={() => setselectedSize(s)}
+                onClick={() => setselectedSize(s as ISizes)}
                 key={s}
                 className={cn(
                   "h-8 w-8 rounded-full border border-white border-opacity-75 bg-transparent text-white flex items-center text-sm justify-center",

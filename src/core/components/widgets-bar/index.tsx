@@ -5,18 +5,25 @@ import { DialogOverlay } from "@radix-ui/react-dialog"
 // import { Dialog, DialogContent } from '@radix-ui/react-dialog';
 import React from "react"
 import WidgetWeather from "./WidgetWeather"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import AppLauncher from "../common/AppLauncher"
 import { apps } from "src/misc/placeholder-data/apps"
 import { setMaximized } from "src/core/redux/system/system.slice"
+import { AppState } from "src/core/redux/redux"
 
 const WidgetsBar = () => {
+  const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   return (
     <div className="widgets-bar  px-0 py-4 flex flex-shrink-0 flex-col gap-4 overflow-y-auto overflow-x-hidden h-[98vh] no-scrollbar  ">
-      <WidgetWeather size="S" />
-      <WidgetWeather size="M" />
-      <WidgetWeather size="L" />
-      <WidgetWeather size="L" />
+      {systemWidgets.map((SystemWidget, idx) => {
+        return (
+          <SystemWidget.widget.component
+            key={SystemWidget.widget.name + SystemWidget.widget.appId?.toString() + idx.toString()}
+            size={SystemWidget.size}
+          />
+        )
+      })}
+
       <div className="action flex justify-center relative align-middle pb-24">
         <AppLauncher appId={12}>
           <button className="outline-none bg-black bg-opacity-50 rounded-full border transition-all duration-100 border-gray-500 py-1 text-xs px-4 text-white text-opacity-80 active:text-opacity-90 active:bg-opacity-30">

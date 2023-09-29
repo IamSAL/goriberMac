@@ -4,6 +4,8 @@ import WidgetSlot from "./WidgetSlot"
 import { useAppContext } from "src/core/components/app-window/appContext"
 import { useModal } from "@ebay/nice-modal-react"
 import { CONSTANTS } from "@constants"
+import { useSelector } from "react-redux"
+import { AppState } from "src/core/redux/redux"
 
 const WidgetsSlotBar = () => {
   const { onTerminate } = useAppContext()
@@ -12,14 +14,21 @@ const WidgetsSlotBar = () => {
     onTerminate()
     // await widgetsBarModal.show()
   }
+  const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   return (
     <div className="slot overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto overflow-x-hidden ">
       <div className="widgets-bar  p-8 py-4 flex flex-shrink-0 flex-col gap-4   ">
-        <WidgetSlot name="Test" description="Tes" component={() => <WidgetWeather size="S" />} />
-        <WidgetSlot name="Test" description="Tes" component={() => <WidgetWeather size="M" />} />
-        <WidgetSlot name="Test" description="Tes" component={() => <WidgetWeather size="L" />} />
-        <WidgetSlot name="Test" description="Tes" component={() => <WidgetWeather size="M" />} />
-        <WidgetSlot name="Test" description="Tes" component={() => <WidgetWeather size="L" />} />
+        {systemWidgets.map((SystemWidget, idx) => {
+          return (
+            <WidgetSlot
+              key={
+                SystemWidget.widget.name + SystemWidget.widget.appId?.toString() + idx.toString()
+              }
+              SystemWidget={SystemWidget}
+            />
+          )
+        })}
+
         <div className="action flex justify-center relative align-middle pb-24">
           <button
             onClick={onWidgetSlotExit}
