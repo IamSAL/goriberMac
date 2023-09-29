@@ -12,18 +12,22 @@ const WidgetBody = ({ component, ...props }: any) => {
 
 type TProps = {
   SystemWidget: ISystemWidget
+  controls?: boolean
 }
 
-const WidgetSlot = ({ SystemWidget }: TProps) => {
+const WidgetSlot = ({ SystemWidget, controls = true }: TProps) => {
   const dispatch = useDispatch()
 
   return (
     <div className="relative">
       <button
-        onClick={() => dispatch(removeWidget(SystemWidget.widget))}
+        onClick={() => dispatch(removeWidget(SystemWidget))}
         className={cn(
           "absolute z-50 left-[-5px] top-[-5px] h-4 w-4 rounded-full border border-white border-opacity-75 bg-white bg-opacity-75 text-black flex items-center text-sm justify-center"
         )}
+        style={{
+          display: controls ? "inline-block" : "none",
+        }}
       >
         <Minus size={12} />
       </button>

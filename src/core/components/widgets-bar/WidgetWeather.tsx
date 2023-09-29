@@ -106,7 +106,6 @@ const LargeWidget = () => {
 }
 
 const WidgetWeather = ({ size = "L", className }: WidgetProps) => {
-  console.log({ size })
   const getWidget = () => {
     switch (size) {
       case "S":

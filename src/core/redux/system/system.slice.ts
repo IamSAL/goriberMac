@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ISizes, IWidget } from "@types"
 import { apps } from "src/misc/placeholder-data/apps"
-
+import { v1 as uuid } from "uuid"
 //@ts-expect-error
 const initialState: ISystemState = {
   isMaximized: false,
@@ -16,16 +16,12 @@ export const systemSlice = createSlice({
       return { ...state, isMaximized: action.payload }
     },
     addWidget: (state, action: PayloadAction<ISystemWidget>) => {
-      return { ...state, widgets: [...state.widgets, action.payload] }
+      return { ...state, widgets: [...state.widgets, { id: uuid(), ...action.payload }] }
     },
-    removeWidget: (state, action: PayloadAction<IWidget>) => {
+    removeWidget: (state, action: PayloadAction<ISystemWidget>) => {
       return {
         ...state,
-        widgets: [
-          ...state.widgets.filter(
-            (w) => w.widget.name !== action.payload.name && w.widget.appId !== action.payload.appId
-          ),
-        ],
+        widgets: [...state.widgets.filter((w) => w.id !== action.payload.id)],
       }
     },
   },
@@ -33,7 +29,7 @@ export const systemSlice = createSlice({
 
 export const { setMaximized, addWidget, removeWidget } = systemSlice.actions
 export default systemSlice.reducer
-export type ISystemWidget = { widget: IWidget; size: ISizes; order?: number }
+export type ISystemWidget = { id?: string; widget: IWidget; size: ISizes; order?: number }
 interface ISystemState {
   isMaximized: boolean
   General: General

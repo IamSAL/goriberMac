@@ -10,11 +10,12 @@ import AppLauncher from "../common/AppLauncher"
 import { apps } from "src/misc/placeholder-data/apps"
 import { setMaximized } from "src/core/redux/system/system.slice"
 import { AppState } from "src/core/redux/redux"
+import { cn } from "@utils"
 
 const WidgetsBar = () => {
   const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   return (
-    <div className="widgets-bar  px-0 py-4 flex flex-shrink-0 flex-col gap-4 overflow-y-auto overflow-x-hidden h-[98vh] no-scrollbar  ">
+    <div className="widgets-bar min-w-[320px]  px-0 py-4 flex flex-shrink-0 flex-col gap-4 overflow-y-auto overflow-x-hidden h-[98vh] no-scrollbar   ">
       {systemWidgets.map((SystemWidget, idx) => {
         return (
           <SystemWidget.widget.component
@@ -23,6 +24,19 @@ const WidgetsBar = () => {
           />
         )
       })}
+
+      {systemWidgets.length === 0 && (
+        <AppLauncher appId={12}>
+          {" "}
+          <div
+            className={cn(
+              "relative flex-shrink-0 flex justify-center items-center bg-gradient-to-b to-[#3d3d3d00] from-[#0a0b0c] rounded-2xl shadow p-4 w-80 h-40 opacity-50"
+            )}
+          >
+            Add widgets here.
+          </div>{" "}
+        </AppLauncher>
+      )}
 
       <div className="action flex justify-center relative align-middle pb-24">
         <AppLauncher appId={12}>
@@ -46,10 +60,10 @@ export const WidgetsBarDrawer = NiceModal.create(({ content }: { content: string
         }
       }}
     >
-      <DrawerContent className="bg-transparent border-0 shadow-none px-3 " role="dialog">
+      <DrawerContent className="bg-transparent border-0 shadow-none px-3  " role="dialog">
         <div className="relative">
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b to-transparent from-[#21242adc] blur-lg" />
-          <div className="px-0">
+          <div className="px-0 ">
             <WidgetsBar />
           </div>
           <div className="absolute inset-x-0 bottom-[-10px] h-32 bg-gradient-to-t from-[#21242adc] to-transparent blur-lg" />

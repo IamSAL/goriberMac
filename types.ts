@@ -1,5 +1,6 @@
 import { SimpleRolesIsAuthorized } from "@blitzjs/auth"
 import { User } from "db"
+import { as } from "vitest/dist/types-de0e0997"
 
 export type Role = "ADMIN" | "USER"
 
@@ -103,3 +104,7 @@ export interface IMenuItem {
   isEnabled: boolean // Is the item enabled (clickable)?
   // Other menu item-specific properties (e.g., icons)
 }
+
+export const DROPPABLES = {
+  WIDGET: "WIDGET",
+} as const
