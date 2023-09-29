@@ -43,7 +43,7 @@ trackPageLoadingProgress((percentage) => {
   const loader = document.getElementById("globalLoader")
   const logo = document.getElementById("preloader-logo")
   const progressBar = document.querySelector("#preloader-progress")
-  const adjustedPercentage = Math.min(100, percentage * 1.5)
+  const adjustedPercentage = Math.min(100, percentage * 1.2)
   if (percentage > 50) {
     logo.style.animation = "applePulse 2s infinite"
   }

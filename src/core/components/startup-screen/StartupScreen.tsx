@@ -68,7 +68,7 @@ const StartupScreen: React.FC = () => {
               backgroundColor: "#ffffff",
               borderRadius: "16px",
               width: "0%",
-              transition: "1s",
+              transition: "0.5s",
             }}
           ></div>
         </div>
