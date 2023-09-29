@@ -35,8 +35,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const progressBar = document.querySelector<HTMLDivElement>("#preloader-progress")
       const loader = document.getElementById("globalLoader")
-      if (loader) loader.remove()
+      if (progressBar) {
+        progressBar.style.width = `${100}%`
+      }
+      if (loader) {
+        loader.classList.add(...["duration-1000", "opacity-0"])
+        setTimeout(() => {
+          loader.remove()
+        }, 1500)
+      }
     }
   }, [])
   return (
