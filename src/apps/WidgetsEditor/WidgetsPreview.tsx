@@ -5,7 +5,7 @@ import Chance from "chance"
 import React, { useContext, useState } from "react"
 import { useDrag, DragSourceMonitor } from "react-dnd"
 import { useDispatch } from "react-redux"
-import { addWidget } from "src/core/redux/system/system.slice"
+import { ISystemWidget, addWidget } from "src/core/redux/system/system.slice"
 import { Preview, Context, usePreview } from "react-dnd-preview"
 import style from "styled-jsx/style"
 type TProps = {
@@ -28,13 +28,19 @@ const WidgetBody = ({ component, ...props }: any) => {
 
 const DraggedPreview = () => {
   const preview = usePreview()
+
   if (!preview.display) {
     return null
   }
-  console.log({ preview })
+
   return (
     <div className="item-list__item" style={preview.style}>
-      {<WidgetBody component={preview.item.widget.component} size={preview.item.size} />}
+      {
+        <WidgetBody
+          component={(preview.item as ISystemWidget).widget.component}
+          size={(preview.item as ISystemWidget).size}
+        />
+      }
     </div>
   )
 }
