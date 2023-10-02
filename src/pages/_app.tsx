@@ -33,26 +33,7 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const progressBar = document.querySelector<HTMLDivElement>("#preloader-progress")
-      const loader = document.getElementById("globalLoader")
 
-      if (loader) {
-        setTimeout(() => {
-          if (progressBar) {
-            progressBar.style.width = `${100}%`
-          }
-        }, 2000)
-        setTimeout(() => {
-          loader.classList.add(...["duration-1000", "opacity-0"])
-        }, 4000)
-        setTimeout(() => {
-          loader.remove()
-        }, 5000)
-      }
-    }
-  }, [])
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}

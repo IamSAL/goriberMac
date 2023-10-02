@@ -36,18 +36,32 @@ function trackPageLoadingProgress(callback) {
     stylesheet.addEventListener("load", resourceLoaded)
     stylesheet.addEventListener("error", resourceLoaded) // Handle errors if a stylesheet fails to load
   })
+
+  window.addEventListener("load", () => {
+    const progressBar = document.querySelector("#preloader-progress")
+    const loader = document.getElementById("globalLoader")
+    if (progressBar) {
+      progressBar.style.width = `100%`
+    }
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add(...["duration-1000", "opacity-0"])
+      }, 1000)
+      setTimeout(() => {
+        loader.remove()
+      }, 2000)
+    }
+  })
 }
 
 // Example of using the function
 trackPageLoadingProgress((percentage) => {
-  const loader = document.getElementById("globalLoader")
   const logo = document.getElementById("preloader-logo")
   const progressBar = document.querySelector("#preloader-progress")
-  const adjustedPercentage = Math.min(100, percentage * 1.2)
   if (percentage > 50) {
     logo.style.animation = "applePulse 2s infinite"
   }
   if (progressBar) {
-    progressBar.style.width = `${adjustedPercentage}%`
+    progressBar.style.width = `${percentage}%`
   }
 })
