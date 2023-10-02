@@ -1,4 +1,4 @@
-import Image from "next/image"
+import NextImage from "next/image"
 import React, { useEffect, useRef, useState } from "react"
 // import IconSearch from '/src/assets/icons/System/Search.svg';
 import WidgetsSearchForm from "./WidgetsSearchForm"
@@ -46,7 +46,7 @@ const WidgetsEditor = () => {
           ref={programRef}
           role="dialog"
         >
-          <Image
+          <NextImage
             src="/static/images/wallpapers/dark.svg"
             className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"
             alt="launchpad-bg"
@@ -57,14 +57,14 @@ const WidgetsEditor = () => {
 
           <div id="content" className="absolute top-0 left-0 w-full h-full z-20 fade-in-100">
             <div className="flex justify-between">
-              <div className="flex-[20%] justify-start">
+              <div className="flex-[30%] justify-start">
                 {" "}
                 <WidgetsSearchForm />
               </div>
-              <div className="flex-[60%] justify-center items-center">
+              <div className="flex-[40%] justify-center items-center">
                 <WidgetsSearchResult />
               </div>
-              <div className="flex-[20%] justify-end">
+              <div className="flex-[30%] justify-end">
                 {" "}
                 <WidgetsSlotBar />
               </div>

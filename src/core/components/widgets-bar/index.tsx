@@ -15,7 +15,7 @@ import { cn } from "@utils"
 const WidgetsBar = () => {
   const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   return (
-    <div className="widgets-bar min-w-[320px]  px-0 py-4 flex flex-shrink-0 flex-col gap-4 overflow-y-auto overflow-x-hidden h-[98vh] no-scrollbar   ">
+    <div className="widgets-bar min-w-[320px]  px-0 py-4 flex flex-shrink-0 flex-col gap-4 overflow-y-auto overflow-x-hidden max-h-[98vh] no-scrollbar   ">
       {systemWidgets.map((SystemWidget, idx) => {
         return (
           <SystemWidget.widget.component
@@ -30,10 +30,10 @@ const WidgetsBar = () => {
           {" "}
           <div
             className={cn(
-              "relative flex-shrink-0 flex justify-center items-center bg-gradient-to-b to-[#3d3d3d00] from-[#0a0b0c] rounded-2xl shadow p-4 w-80 h-40 opacity-50"
+              "relative flex-shrink-0 flex justify-center items-center  rounded-2xl shadow p-4 w-80 h-40 opacity-50"
             )}
           >
-            Add widgets here.
+            No recent notifications
           </div>{" "}
         </AppLauncher>
       )}
@@ -66,7 +66,7 @@ export const WidgetsBarDrawer = NiceModal.create(({ content }: { content: string
           <div className="px-0 ">
             <WidgetsBar />
           </div>
-          <div className="absolute inset-x-0 bottom-[-10px] h-32 bg-gradient-to-t from-[#21242adc] to-transparent blur-lg" />
+          <div className="absolute inset-x-0 bottom-[-10px] h-32 bg-gradient-to-t from-[#21242a64] to-transparent blur-lg" />
         </div>
       </DrawerContent>
     </Drawer>

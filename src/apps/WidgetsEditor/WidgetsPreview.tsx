@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import { ISystemWidget, addWidget } from "src/core/redux/system/system.slice"
 import { Preview, Context, usePreview } from "react-dnd-preview"
 import style from "styled-jsx/style"
+import { Minus, Plus } from "lucide-react"
 type TProps = {
   widget: IWidget
 }
@@ -23,7 +24,19 @@ export interface BoxProps {
 }
 
 const WidgetBody = ({ component, ...props }: any) => {
-  return component(props)
+  return (
+    <div className="relative group">
+      {" "}
+      <button
+        className={cn(
+          "absolute opacity-0 group-active:opacity-0 transition-opacity duration-75 group-hover:opacity-100 z-50 left-[-5px] top-[-5px] h-7 w-7 rounded-full  bg-green-500 shadow-md flex items-center text-sm justify-center"
+        )}
+      >
+        <Plus size={20} color="white" />
+      </button>
+      {component(props)}
+    </div>
+  )
 }
 
 const DraggedPreview = () => {
@@ -34,7 +47,7 @@ const DraggedPreview = () => {
   }
 
   return (
-    <div className="item-list__item" style={preview.style}>
+    <div className="item-list__item " style={preview.style}>
       {
         <WidgetBody
           component={(preview.item as ISystemWidget).widget.component}
@@ -51,7 +64,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
   const { name, description, multiSized, component } = widget
   const [selectedSize, setselectedSize] = useState<ISizes>(chance.pickone(["S", "M", "L"]))
 
-  const [{ opacity }, drag] = useDrag(
+  const [{ isDragging }, drag] = useDrag(
     () => ({
       type: DROPPABLES.WIDGET,
       item: { widget, size: selectedSize },
@@ -60,7 +73,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
         // console.log({ item, dropResult })
       },
       collect: (monitor: DragSourceMonitor) => ({
-        opacity: monitor.isDragging() ? 0.4 : 1,
+        isDragging: monitor.isDragging(),
       }),
     }),
     [selectedSize]
@@ -68,7 +81,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
 
   return (
     <div className="Item1 w-72 h-[450px] p-5 bg-white bg-opacity-10 rounded-2xl flex-col justify-start items-center  inline-flex">
-      <DraggedPreview />
+      {/* <DraggedPreview /> */}
 
       <div className="TextContent w-64 h-10 flex-col justify-start items-start gap-1 inline-flex">
         <div className="Title w-64 text-white text-base font-bold font-['SF Pro Display'] leading-tight">
@@ -80,10 +93,13 @@ const WidgetsPreview = ({ widget }: TProps) => {
       </div>
       <div
         className={cn(
-          "w-80 h-96 flex justify-center items-center scale-75 overflow-hidden transition-opacity duration-300"
+          "w-80 h-96 flex justify-center items-center scale-75  transition-all duration-200 ease-in-out hover:scale-[0.8]",
+          {
+            "scale-75 hover:scale-75": isDragging,
+          }
         )}
-        style={{ opacity }}
         ref={drag}
+        onClick={() => dispatch(addWidget({ widget, size: selectedSize } as ISystemWidget))}
       >
         {<WidgetBody component={component} size={selectedSize} />}
       </div>

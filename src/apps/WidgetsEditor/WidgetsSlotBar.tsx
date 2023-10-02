@@ -49,40 +49,35 @@ const WidgetsSlotBar = () => {
   const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <div
-      className="slot overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto overflow-x-hidden "
+      className="slot overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto overflow-x-hidden flex justify-end"
       ref={drop}
     >
-      <div
-        className={cn(
-          "widgets-bar  p-8 py-4 flex flex-shrink-0 flex-col gap-4 min-w-[384px] h-full",
-          {
-            " bg-gradient-to-b to-[#46464609] from-[#cccccc4f] transition-all duration-300":
-              collectedProps.canDrop,
-          }
-        )}
-        ref={animeParent}
-      >
-        {systemWidgets.map((SystemWidget, idx) => {
-          return <WidgetSlot key={SystemWidget.id} SystemWidget={SystemWidget} />
-        })}
-        {previewWidget && isActive ? (
-          <WidgetSlot controls={false} SystemWidget={previewWidget} />
-        ) : (
-          <div
-            className={cn(
-              "relative flex-shrink-0 flex justify-center items-center bg-gradient-to-b to-[#3d3d3d71] from-[#0a0b0c] rounded-2xl shadow p-4 w-80 h-40 opacity-50"
-            )}
-          >
-            Drag widgets here
+      <div className="w-[384px]">
+        {" "}
+        <div
+          className={cn(
+            "widgets-bar bg-gradient-to-l to-[#46464600] from-[#cccccc00]  p-8 py-4 flex flex-shrink-0 flex-col gap-4 min-w-[384px] h-full",
+            {
+              " bg-gradient-to-l to-transparent from-[#cccccc2a] transition-all duration-500":
+                collectedProps.canDrop,
+            }
+          )}
+          ref={animeParent}
+        >
+          {systemWidgets.map((SystemWidget, idx) => {
+            return <WidgetSlot key={SystemWidget.id} SystemWidget={SystemWidget} />
+          })}
+          {previewWidget && isActive && (
+            <WidgetSlot controls={false} SystemWidget={previewWidget} className="opacity-25 " />
+          )}
+          <div className="action flex justify-center relative align-middle   z-[9999]">
+            <button
+              onClick={onWidgetSlotExit}
+              className="outline-none bg-black bg-opacity-50  mt-10 mb-16 rounded-full border transition-all duration-100 border-gray-500 py-1 text-xs px-4 text-white text-opacity-80 active:text-opacity-90 active:bg-opacity-30"
+            >
+              Done
+            </button>
           </div>
-        )}
-        <div className="action flex justify-center relative align-middle pb-24 z-[9999]">
-          <button
-            onClick={onWidgetSlotExit}
-            className="outline-none bg-black bg-opacity-50 rounded-full border transition-all duration-100 border-gray-500 py-1 text-xs px-4 text-white text-opacity-80 active:text-opacity-90 active:bg-opacity-30"
-          >
-            Exit
-          </button>
         </div>
       </div>
     </div>
