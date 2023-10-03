@@ -108,4 +108,5 @@ export interface IMenuItem {
 
 export const DROPPABLES = {
   WIDGET: "WIDGET",
+  SYSTEM_WIDGET: " SYSTEM_WIDGET",
 } as const

@@ -13,12 +13,6 @@ type TProps = {
   widget: IWidget
 }
 
-interface DropResult {
-  allowedDropEffect: string
-  dropEffect: string
-  name: string
-}
-
 export interface BoxProps {
   name: string
 }
@@ -69,7 +63,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
       type: DROPPABLES.WIDGET,
       item: { widget, size: selectedSize },
       end(item, monitor) {
-        const dropResult = monitor.getDropResult() as DropResult
+        const dropResult = monitor.getDropResult()
         // console.log({ item, dropResult })
       },
       collect: (monitor: DragSourceMonitor) => ({

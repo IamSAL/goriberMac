@@ -8,6 +8,8 @@ export interface IWidgetEditorContext {
   setselectedAppId: React.Dispatch<number | number>
   matchedApps: IApp[]
   matchedWidgets: IWidget[]
+  isEditing: boolean
+  setisEditing: React.Dispatch<boolean>
 }
 export const dummyContext: IWidgetEditorContext = {
   searchTerm: "",
@@ -16,6 +18,8 @@ export const dummyContext: IWidgetEditorContext = {
   setselectedAppId: () => {},
   matchedApps: [],
   matchedWidgets: [],
+  isEditing: false,
+  setisEditing: () => {},
 }
 export const WidgetEditorContext = React.createContext<IWidgetEditorContext>(dummyContext)
 

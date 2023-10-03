@@ -1,7 +1,8 @@
-import { IWidget } from "@types"
+import { DROPPABLES, IWidget } from "@types"
 import { cn } from "@utils"
 import { Minus } from "lucide-react"
 import React, { useEffect, useRef, useState } from "react"
+import { useDrag, DragSourceMonitor } from "react-dnd"
 import { useDispatch } from "react-redux"
 import { useEffectOnce, useEvent, useHover, useMouseHovered } from "react-use"
 import { ISystemWidget, removeWidget } from "src/core/redux/system/system.slice"
@@ -39,6 +40,21 @@ const WidgetSlot = ({ SystemWidget, controls = true, className }: TProps) => {
       containerRef.current?.removeEventListener("mouseleave", onMouseLeave)
     }
   })
+
+  // const [{ isDragging }, drag] = useDrag(
+  //   () => ({
+  //     type: DROPPABLES.SYSTEM_WIDGET,
+  //     item: { widget: SystemWidget.widget, size: SystemWidget.size },
+  //     end(item, monitor) {
+  //       const dropResult = monitor.getDropResult()
+  //       // console.log({ item, dropResult })
+  //     },
+  //     collect: (monitor: DragSourceMonitor) => ({
+  //       isDragging: monitor.isDragging(),
+  //     }),
+  //   }),
+  //   []
+  // )
 
   return (
     <div className={cn("relative group ", className)}>
