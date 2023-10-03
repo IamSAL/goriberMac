@@ -24,7 +24,7 @@ const LargeWidget = () => {
   )
 }
 
-const PlaceHolderWidget = ({ size = "L", className }: WidgetProps) => {
+const PlaceHolderWidget = ({ size = "L", className, isEditing }: WidgetProps) => {
   const getWidget = () => {
     switch (size) {
       case "S":

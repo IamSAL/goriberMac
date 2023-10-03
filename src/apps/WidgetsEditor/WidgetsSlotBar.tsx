@@ -52,15 +52,15 @@ const WidgetsSlotBar = () => {
       className="slot overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto overflow-x-hidden flex justify-end"
       ref={drop}
     >
-      <div className="w-[384px]">
+      <div className="max-w-[384px]">
         {" "}
         <div
           className={cn(
-            "widgets-bar bg-gradient-to-l to-[#46464600] from-[#cccccc00]  p-8 py-4 flex flex-shrink-0 flex-col gap-4 min-w-[384px] h-full",
-            {
-              " bg-gradient-to-l to-transparent from-[#cccccc2a] transition-all duration-500":
-                collectedProps.canDrop,
-            }
+            "widgets-bar bg-gradient-to-l to-[#46464600] from-[#cccccc00]  p-8 py-4 min-w-[384px]  flex flex-wrap "
+            // {
+            //   " bg-gradient-to-l to-transparent from-[#cccccc2a] transition-all duration-500":
+            //     collectedProps.canDrop,
+            // }
           )}
           ref={animeParent}
         >
@@ -70,14 +70,14 @@ const WidgetsSlotBar = () => {
           {previewWidget && isActive && (
             <WidgetSlot controls={false} SystemWidget={previewWidget} className="opacity-25 " />
           )}
-          <div className="action flex justify-center relative align-middle   z-[9999]">
-            <button
-              onClick={onWidgetSlotExit}
-              className="outline-none bg-black bg-opacity-50  mt-10 mb-16 rounded-full border transition-all duration-100 border-gray-500 py-1 text-xs px-4 text-white text-opacity-80 active:text-opacity-90 active:bg-opacity-30"
-            >
-              Done
-            </button>
-          </div>
+        </div>
+        <div className="action flex justify-center relative align-middle   z-[9999]">
+          <button
+            onClick={onWidgetSlotExit}
+            className="outline-none bg-black bg-opacity-50  mt-10 mb-16 rounded-full border transition-all duration-100 border-gray-500 py-1 text-xs px-4 text-white text-opacity-80 active:text-opacity-90 active:bg-opacity-30"
+          >
+            Done
+          </button>
         </div>
       </div>
     </div>

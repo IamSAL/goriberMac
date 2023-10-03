@@ -24,6 +24,7 @@ export type ISizes = "S" | "M" | "L"
 export type WidgetProps = {
   size?: ISizes
   className?: string
+  isEditing?: boolean
 }
 export interface IWidget {
   name: string
