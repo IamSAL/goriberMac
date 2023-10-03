@@ -11,7 +11,7 @@ import { HTML5toTouch } from "rdndmb-html5-to-touch"
 import { MultiBackend } from "react-dnd-multi-backend"
 
 type TProps = {
-  isEditingMode: boolean
+  isEditingMode?: boolean
 }
 const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
   const [searchTerm, setsearchTerm] = useState("")
