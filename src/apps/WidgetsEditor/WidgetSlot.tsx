@@ -1,15 +1,14 @@
-import { DROPPABLES, IWidget } from "@types"
+import { DROPPABLES, DROPPABLE_ACTIONS, IDroppableItem, IWidget } from "@types"
 import { cn } from "@utils"
 import { Minus } from "lucide-react"
 import React, { useEffect, useRef, useState } from "react"
-import { useDrag, DragSourceMonitor } from "react-dnd"
+import { useDrag, DragSourceMonitor, useDrop } from "react-dnd"
 import { useDispatch } from "react-redux"
 import { useEffectOnce, useEvent, useHover, useMouseHovered } from "react-use"
 import { ISystemWidget, removeWidget } from "src/core/redux/system/system.slice"
 import { apps } from "src/misc/placeholder-data/apps"
 
 const WidgetBody = ({ component, ...props }: any) => {
-  console.log({ props })
   return component(props)
 }
 
@@ -17,14 +16,16 @@ type TProps = {
   SystemWidget: ISystemWidget
   controls?: boolean
   className?: string
+  index: number
+  moveWidget: (dragIndex: number, hoverIndex: number) => void
 }
 
-const WidgetSlot = ({ SystemWidget, controls = true, className }: TProps) => {
+const WidgetSlot = ({ SystemWidget, controls = true, className, index, moveWidget }: TProps) => {
   const dispatch = useDispatch()
   const app = apps.find((app) => app.id === SystemWidget.widget.appId)
   const containerRef = useRef<any>()
   const labelRef = useRef<any>()
-
+  const ref = useRef<HTMLDivElement>(null)
   const onMouseEnter = () => {
     if (labelRef.current) labelRef.current.innerText = "Edit widget"
   }
@@ -41,23 +42,71 @@ const WidgetSlot = ({ SystemWidget, controls = true, className }: TProps) => {
     }
   })
 
-  // const [{ isDragging }, drag] = useDrag(
-  //   () => ({
-  //     type: DROPPABLES.SYSTEM_WIDGET,
-  //     item: { widget: SystemWidget.widget, size: SystemWidget.size },
-  //     end(item, monitor) {
-  //       const dropResult = monitor.getDropResult()
-  //       // console.log({ item, dropResult })
-  //     },
-  //     collect: (monitor: DragSourceMonitor) => ({
-  //       isDragging: monitor.isDragging(),
-  //     }),
-  //   }),
-  //   []
-  // )
+  const [{ isDragging }, drag] = useDrag(
+    () => ({
+      type: DROPPABLES.SYSTEM_WIDGET,
+      item: {
+        payload: { ...SystemWidget, index },
+        action: DROPPABLE_ACTIONS.MOVE,
+      } as IDroppableItem<ISystemWidget & { index: number }>,
+      end(item, monitor) {
+        const dropResult = monitor.getDropResult()
+        // console.log({ item, dropResult })
+      },
+      collect: (monitor: DragSourceMonitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }),
+    []
+  )
+
+  //TODO: HANDLE DIRECT ADDING TO A POSITION
+  const [, drop] = useDrop(
+    () => ({
+      accept: DROPPABLES.SYSTEM_WIDGET,
+
+      hover: (item: IDroppableItem<ISystemWidget & { index: number }>, monitor) => {
+        if (!ref.current) {
+          return
+        }
+        const dragIndex = item.payload.index
+        const hoverIndex = index
+        // Don't replace items with themselves
+        if (dragIndex === hoverIndex) {
+          return
+        }
+        // Determine rectangle on screen
+        const hoverBoundingRect = ref.current?.getBoundingClientRect()
+        // Get vertical middle
+        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+        // Determine mouse position
+        const clientOffset = monitor.getClientOffset()
+        // Get pixels to the top
+        const hoverClientY = clientOffset!.y - hoverBoundingRect.top
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+          return
+        }
+        // Dragging upwards
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+          return
+        }
+        moveWidget(dragIndex, hoverIndex)
+        item.payload.index = hoverIndex
+      },
+      collect: (monitor: any) => ({
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+        handlerId: monitor.getHandlerId(),
+      }),
+    }),
+    []
+  )
+
+  drag(drop(ref))
+  const opacity = isDragging ? 0.25 : 1
 
   return (
-    <div className={cn("relative group ", className)}>
+    <div className={cn("relative group ", className)} ref={ref} style={{ opacity }}>
       <div
         className="peer hover:scale-100 transition-all duration-100 ease-in-out scale-95 my-2"
         ref={containerRef}

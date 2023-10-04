@@ -15,6 +15,9 @@ export const systemSlice = createSlice({
     setMaximized: (state, action: PayloadAction<boolean>) => {
       return { ...state, isMaximized: action.payload }
     },
+    setWidgets: (state, action: PayloadAction<ISystemWidget[]>) => {
+      return { ...state, widgets: action.payload }
+    },
     addWidget: (state, action: PayloadAction<ISystemWidget>) => {
       return { ...state, widgets: [...state.widgets, { id: uuid(), ...action.payload }] }
     },
@@ -27,7 +30,7 @@ export const systemSlice = createSlice({
   },
 })
 
-export const { setMaximized, addWidget, removeWidget } = systemSlice.actions
+export const { setMaximized, addWidget, removeWidget, setWidgets } = systemSlice.actions
 export default systemSlice.reducer
 export type ISystemWidget = { id?: string; widget: IWidget; size: ISizes; order?: number }
 interface ISystemState {

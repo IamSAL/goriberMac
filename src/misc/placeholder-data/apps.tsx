@@ -30,7 +30,7 @@ export const apps: IApp[] = [
       description: "Weather.com forecasts", // A short description or tooltip
       version: "0.0.1", // App version number
     },
-    component: WidgetsEditor,
+    component: WidgetsEditor as any,
     config: {
       isHidden: true,
       initTitle: "Weather",

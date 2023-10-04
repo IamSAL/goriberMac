@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import WidgetWeather from "src/core/components/widgets-bar/WidgetWeather"
 import WidgetSlot from "./WidgetSlot"
 import { useAppContext } from "src/core/components/app-window/appContext"
@@ -7,15 +7,16 @@ import { CONSTANTS } from "@constants"
 import { useDispatch, useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import { useDrop } from "react-dnd"
-import { DROPPABLES } from "@types"
+import { DROPPABLES, DROPPABLE_ACTIONS, IDroppableItem } from "@types"
 import { cn } from "@utils"
-import { ISystemWidget, addWidget } from "src/core/redux/system/system.slice"
+import { ISystemWidget, addWidget, setWidgets } from "src/core/redux/system/system.slice"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { Drawer, DrawerContent } from "@components/ui/Drawer"
 import WidgetsEditor from "."
 import { useWidgetEditorContext } from "./contex"
 import { startApp } from "src/core/redux/memory/memory.slice"
 import AppLauncher from "src/core/components/common/AppLauncher"
+import update from "immutability-helper"
 
 const WidgetsSlotBar = () => {
   const { onTerminate } = useAppContext()
@@ -29,17 +30,33 @@ const WidgetsSlotBar = () => {
   }
   const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   const dispatch = useDispatch()
+  const [widgetsList, setwidgetsList] = useState<ISystemWidget[]>(systemWidgets || [])
+
+  useEffect(() => {
+    dispatch(setWidgets(widgetsList))
+    return () => {}
+  }, [widgetsList])
+
+  useEffect(() => {
+    setwidgetsList(systemWidgets)
+    return () => {}
+  }, [systemWidgets])
+
   const [collectedProps, drop] = useDrop(
     () => ({
       accept: DROPPABLES.WIDGET,
-      drop: (item, monitor) => {
-        dispatch(addWidget(item as ISystemWidget))
-        setPreviewWidget(null)
+      drop: (item: IDroppableItem<ISystemWidget>, monitor) => {
+        if (item.action === DROPPABLE_ACTIONS.COPY) {
+          dispatch(addWidget(item.payload))
+          setPreviewWidget(null)
+        } else {
+          console.log("will move")
+        }
       },
-      hover: (item: ISystemWidget, monitor) => {
+      hover: (item: IDroppableItem<ISystemWidget>, monitor) => {
         const isOver = monitor.isOver({ shallow: true })
-        if (isOver && previewWidget?.widget.name !== item?.widget.name) {
-          setPreviewWidget(item)
+        if (isOver && previewWidget?.widget.name !== item?.payload.widget.name) {
+          setPreviewWidget(item.payload)
         } else {
           setPreviewWidget(null)
         }
@@ -47,6 +64,7 @@ const WidgetsSlotBar = () => {
       collect: (monitor: any) => ({
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
+        handlerId: monitor.getHandlerId(),
       }),
     }),
     []
@@ -54,6 +72,26 @@ const WidgetsSlotBar = () => {
 
   const isActive = collectedProps.canDrop && collectedProps.isOver
   const [animeParent, enableAnimations] = useAutoAnimate()
+
+  const moveWidget = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      setwidgetsList((prev) => {
+        const dragCard = prev[dragIndex]
+        console.log({ dragCard, dragIndex, widgetsList: prev })
+        if (dragCard) {
+          return update(prev, {
+            $splice: [
+              [dragIndex, 1],
+              [hoverIndex, 0, dragCard as ISystemWidget],
+            ],
+          })
+        }
+        return null as any
+      })
+    },
+    [widgetsList]
+  )
+
   return (
     <div
       className="slot overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto overflow-x-hidden flex justify-end"
@@ -71,13 +109,23 @@ const WidgetsSlotBar = () => {
           )}
           ref={animeParent}
         >
-          {systemWidgets.map((SystemWidget, idx) => {
+          {widgetsList.map((SystemWidget, idx) => {
             return (
-              <WidgetSlot key={SystemWidget.id} SystemWidget={SystemWidget} controls={isEditing} />
+              <WidgetSlot
+                key={SystemWidget.id}
+                SystemWidget={SystemWidget}
+                controls={isEditing}
+                moveWidget={moveWidget}
+                index={idx}
+              />
             )
           })}
           {previewWidget && isActive && (
-            <WidgetSlot controls={false} SystemWidget={previewWidget} className="opacity-25 " />
+            <previewWidget.widget.component
+              size={previewWidget.size}
+              isEditing
+              className="opacity-25 "
+            />
           )}
         </div>
         <div className="action flex justify-center relative align-middle   z-[9999]">

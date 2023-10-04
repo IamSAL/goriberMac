@@ -1,5 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import { DROPPABLES, ISizes, IWidget } from "@types"
+import { DROPPABLES, DROPPABLE_ACTIONS, IDroppableItem, ISizes, IWidget } from "@types"
 import { cn } from "@utils"
 import Chance from "chance"
 import React, { useContext, useState } from "react"
@@ -61,7 +61,10 @@ const WidgetsPreview = ({ widget }: TProps) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: DROPPABLES.WIDGET,
-      item: { widget, size: selectedSize },
+      item: {
+        payload: { widget, size: selectedSize },
+        action: DROPPABLE_ACTIONS.COPY,
+      } as IDroppableItem<ISystemWidget>,
       end(item, monitor) {
         const dropResult = monitor.getDropResult()
         // console.log({ item, dropResult })

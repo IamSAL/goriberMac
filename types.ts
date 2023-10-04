@@ -108,5 +108,15 @@ export interface IMenuItem {
 
 export const DROPPABLES = {
   WIDGET: "WIDGET",
-  SYSTEM_WIDGET: " SYSTEM_WIDGET",
+  SYSTEM_WIDGET: "SYSTEM_WIDGET",
 } as const
+
+export const DROPPABLE_ACTIONS = {
+  COPY: "COPY",
+  MOVE: "MOVE",
+} as const
+
+export interface IDroppableItem<T> {
+  payload: T
+  action: keyof typeof DROPPABLE_ACTIONS
+}
