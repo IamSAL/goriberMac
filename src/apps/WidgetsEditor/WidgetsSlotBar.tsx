@@ -17,6 +17,7 @@ import { useWidgetEditorContext } from "./contex"
 import { startApp } from "src/core/redux/memory/memory.slice"
 import AppLauncher from "src/core/components/common/AppLauncher"
 import update from "immutability-helper"
+import useScrollToBottom from "src/helpers/hooks/useScrollToBottom"
 
 const WidgetsSlotBar = () => {
   const { onTerminate } = useAppContext()
@@ -28,6 +29,8 @@ const WidgetsSlotBar = () => {
 
     // await widgetsBarModal.show()
   }
+
+  const { scrollDivRef, scrollToBottom } = useScrollToBottom() // Use the custom hook
   const systemWidgets = useSelector((appState: AppState) => appState.system.widgets)
   const dispatch = useDispatch()
   const [widgetsList, setwidgetsList] = useState<ISystemWidget[]>(systemWidgets || [])
@@ -49,16 +52,21 @@ const WidgetsSlotBar = () => {
         if (item.action === DROPPABLE_ACTIONS.COPY) {
           dispatch(addWidget(item.payload))
           setPreviewWidget(null)
+          scrollToBottom()
         } else {
           console.log("will move")
         }
       },
       hover: (item: IDroppableItem<ISystemWidget>, monitor) => {
         const isOver = monitor.isOver({ shallow: true })
+        const isActive = collectedProps.canDrop && collectedProps.isOver
         if (isOver && previewWidget?.widget.name !== item?.payload.widget.name) {
           setPreviewWidget(item.payload)
         } else {
           setPreviewWidget(null)
+        }
+        if (!isOver) {
+          scrollToBottom()
         }
       },
       collect: (monitor: any) => ({
@@ -128,7 +136,10 @@ const WidgetsSlotBar = () => {
             />
           )}
         </div>
-        <div className="action flex justify-center relative align-middle   z-[9999]">
+        <div
+          className="action flex justify-center relative align-middle   z-[9999]"
+          ref={scrollDivRef}
+        >
           {isEditing ? (
             <button
               onClick={onWidgetSlotExit}
