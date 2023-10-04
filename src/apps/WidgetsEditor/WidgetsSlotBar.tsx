@@ -139,6 +139,7 @@ const WidgetsSlotBar = () => {
         <div
           className="action flex justify-center relative align-middle   z-[9999]"
           ref={scrollDivRef}
+          id="scrollBarBottom"
         >
           {isEditing ? (
             <button

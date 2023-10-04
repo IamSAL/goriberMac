@@ -10,7 +10,7 @@ function useScrollToBottom() {
   }
 
   useEffect(() => {
-    scrollToBottom()
+    // scrollToBottom()
   }, [])
 
   return { scrollDivRef, scrollToBottom }

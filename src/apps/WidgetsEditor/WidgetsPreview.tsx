@@ -96,7 +96,13 @@ const WidgetsPreview = ({ widget }: TProps) => {
           }
         )}
         ref={drag}
-        onClick={() => dispatch(addWidget({ widget, size: selectedSize } as ISystemWidget))}
+        onClick={() => {
+          const bar = document.querySelector("#scrollBarBottom")
+          if (bar) {
+            bar.scrollIntoView({ behavior: "smooth", block: "end" })
+          }
+          dispatch(addWidget({ widget, size: selectedSize } as ISystemWidget))
+        }}
       >
         {<WidgetBody component={component} size={selectedSize} />}
       </div>
