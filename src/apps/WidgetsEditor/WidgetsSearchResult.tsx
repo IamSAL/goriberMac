@@ -7,6 +7,7 @@ import { IWidget } from "@types"
 import { For } from "million/react"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { cn } from "@utils"
+import WidgetsSlotBar from "./WidgetsSlotBar"
 
 const WidgetsSearchResult = () => {
   const { matchedWidgets, selectedAppId, isAnimating } = useWidgetEditorContext()
@@ -20,11 +21,11 @@ const WidgetsSearchResult = () => {
 
   return (
     <div
-      className={cn(" h-[100vh] no-scrollbar   flex justify-center ", {
+      className={cn(" h-[100vh] no-scrollbar   flex justify-between ", {
         "overflow-scroll overflow-y-auto": true,
       })}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8" ref={animeParent}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8  left-0" ref={animeParent}>
         {/* <For each={matchedWidgets}>
           {(widget, idx) => {
             return <WidgetsPreview widget={widget as IWidget} key={widget?.name} />
@@ -35,6 +36,9 @@ const WidgetsSearchResult = () => {
           .map((widget, idx) => {
             return <WidgetsPreview widget={widget as IWidget} key={widget?.name} />
           })}
+      </div>
+      <div className="absolute right-0">
+        <WidgetsSlotBar />
       </div>
     </div>
   )

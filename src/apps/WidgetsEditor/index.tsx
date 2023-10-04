@@ -72,12 +72,8 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
                   {" "}
                   <WidgetsSearchForm />
                 </div>
-                <div className="flex-[40%] justify-center items-center">
+                <div className="flex-[70%] relative">
                   <WidgetsSearchResult />
-                </div>
-                <div className="flex-[30%] justify-end">
-                  {" "}
-                  <WidgetsSlotBar />
                 </div>
               </div>
             </div>
