@@ -10,6 +10,8 @@ export interface IWidgetEditorContext {
   matchedWidgets: IWidget[]
   isEditing: boolean
   setisEditing: React.Dispatch<boolean>
+  isAnimating: boolean
+  setisAnimating: React.Dispatch<boolean>
 }
 export const dummyContext: IWidgetEditorContext = {
   searchTerm: "",
@@ -20,6 +22,8 @@ export const dummyContext: IWidgetEditorContext = {
   matchedWidgets: [],
   isEditing: false,
   setisEditing: () => {},
+  isAnimating: false,
+  setisAnimating: () => {},
 }
 export const WidgetEditorContext = React.createContext<IWidgetEditorContext>(dummyContext)
 

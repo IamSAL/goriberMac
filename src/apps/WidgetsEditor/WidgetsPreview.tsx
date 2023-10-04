@@ -1,14 +1,15 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { DROPPABLES, DROPPABLE_ACTIONS, IDroppableItem, ISizes, IWidget } from "@types"
 import { cn } from "@utils"
 import Chance from "chance"
-import React, { useContext, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { useDrag, DragSourceMonitor } from "react-dnd"
 import { useDispatch } from "react-redux"
 import { ISystemWidget, addWidget } from "src/core/redux/system/system.slice"
 import { Preview, Context, usePreview } from "react-dnd-preview"
 import style from "styled-jsx/style"
 import { Minus, Plus } from "lucide-react"
+import { useAnimation, motion } from "framer-motion"
+import { useWidgetEditorContext } from "./contex"
 type TProps = {
   widget: IWidget
 }
@@ -53,11 +54,14 @@ const DraggedPreview = () => {
 }
 
 const WidgetsPreview = ({ widget }: TProps) => {
+  const { setisAnimating } = useWidgetEditorContext()
   const chance = new Chance()
   const dispatch = useDispatch()
   const { name, description, multiSized, component } = widget
   const [selectedSize, setselectedSize] = useState<ISizes>(chance.pickone(["S", "M", "L"]))
-
+  const barBottom = document.querySelector("#scrollBarBottom")
+  const sourceControls = useAnimation()
+  const sourceRef = useRef<HTMLDivElement>(null)
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: DROPPABLES.WIDGET,
@@ -75,6 +79,68 @@ const WidgetsPreview = ({ widget }: TProps) => {
     }),
     [selectedSize]
   )
+  drag(sourceRef)
+
+  const moveDiv = async () => {
+    setisAnimating(true)
+    if (!sourceRef.current || !barBottom) return
+
+    const sourceDiv = sourceRef.current
+    const targetDiv = barBottom
+
+    // Get the positions of both divs
+    const sourceRect = sourceDiv.getBoundingClientRect()
+    const targetRect = targetDiv.getBoundingClientRect()
+
+    // Calculate the difference in positions
+    const deltaX = targetRect.left - sourceRect.left
+    const deltaY = targetRect.top - sourceRect.top
+    console.log(sourceRect)
+    // Use Framer Motion to animate the source div
+    await sourceControls.start({
+      x: sourceRect.x + 250,
+      y: -500,
+      transition: {
+        duration: 0.7, // Animation duration in seconds
+        ease: "anticipate", // Easing function
+      },
+    })
+
+    await sourceControls.start({
+      x: deltaX,
+      y: deltaY,
+      transition: {
+        duration: 0.3, // Animation duration in seconds
+        ease: "easeInOut", // Easing function
+      },
+    })
+    sourceDiv.style.opacity = "0"
+
+    await sourceControls.start({
+      x: 0,
+      y: 0,
+      scale: 0.75,
+
+      transition: {
+        delay: 0.1,
+        duration: 0, // Animation duration in seconds
+        ease: "easeInOut", // Easing function
+      },
+    })
+    setTimeout(async () => (sourceDiv.style.opacity = "1"), 1000)
+    setisAnimating(false)
+  }
+
+  const AddWidget = async () => {
+    await moveDiv()
+    dispatch(addWidget({ widget, size: selectedSize } as ISystemWidget))
+
+    setTimeout(() => {
+      if (barBottom) {
+        barBottom.scrollIntoView({ behavior: "smooth", block: "end" })
+      }
+    }, 500)
+  }
 
   return (
     <div className="Item1 w-72 h-[450px] p-5 bg-white bg-opacity-10 rounded-2xl flex-col justify-start items-center  inline-flex">
@@ -88,24 +154,19 @@ const WidgetsPreview = ({ widget }: TProps) => {
           {description}
         </div>
       </div>
-      <div
+      <motion.div
         className={cn(
-          "w-80 h-96 flex justify-center items-center scale-75  transition-all duration-200 ease-in-out hover:scale-[0.8]",
+          "w-80 h-96 flex  justify-center items-center scale-75  transition-all duration-200 ease-in-out hover:scale-[0.8]",
           {
             "scale-75 hover:scale-75": isDragging,
           }
         )}
-        ref={drag}
-        onClick={() => {
-          const bar = document.querySelector("#scrollBarBottom")
-          if (bar) {
-            bar.scrollIntoView({ behavior: "smooth", block: "end" })
-          }
-          dispatch(addWidget({ widget, size: selectedSize } as ISystemWidget))
-        }}
+        animate={sourceControls}
+        ref={sourceRef}
+        onClick={AddWidget}
       >
         {<WidgetBody component={component} size={selectedSize} />}
-      </div>
+      </motion.div>
 
       <div className="controls">
         {multiSized ? (

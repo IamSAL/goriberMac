@@ -6,9 +6,10 @@ import { useWidgetEditorContext } from "./contex"
 import { IWidget } from "@types"
 import { For } from "million/react"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
+import { cn } from "@utils"
 
 const WidgetsSearchResult = () => {
-  const { matchedWidgets, selectedAppId } = useWidgetEditorContext()
+  const { matchedWidgets, selectedAppId, isAnimating } = useWidgetEditorContext()
   const [animeParent, enableAnimations] = useAutoAnimate()
   const matchesAppId = (currentId) => {
     if (selectedAppId) {
@@ -18,7 +19,11 @@ const WidgetsSearchResult = () => {
   }
 
   return (
-    <div className="overflow-scroll h-[100vh] no-scrollbar  overflow-y-auto  flex justify-center ">
+    <div
+      className={cn(" h-[100vh] no-scrollbar   flex justify-center ", {
+        "overflow-scroll overflow-y-auto": true,
+      })}
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8" ref={animeParent}>
         {/* <For each={matchedWidgets}>
           {(widget, idx) => {

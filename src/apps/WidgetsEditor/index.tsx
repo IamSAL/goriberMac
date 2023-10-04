@@ -17,6 +17,7 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
   const [searchTerm, setsearchTerm] = useState("")
   const [selectedAppId, setselectedAppId] = useState<number | undefined>()
   const [isEditing, setisEditing] = useState(isEditingMode)
+  const [isAnimating, setisAnimating] = useState(false)
   const programRef = useRef(null)
   const matchedWidgets = apps
     .flatMap((app) => app.widgets || [])
@@ -45,6 +46,8 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
           matchedWidgets,
           isEditing,
           setisEditing,
+          isAnimating,
+          setisAnimating,
         }}
       >
         {isEditing ? (
