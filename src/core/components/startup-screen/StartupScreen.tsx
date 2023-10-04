@@ -58,7 +58,7 @@ const StartupScreen: React.FC = () => {
             backgroundColor: "#474747",
             borderRadius: "16px",
             position: "absolute",
-            bottom: "264px",
+            bottom: "32vh",
           }}
         >
           <div
