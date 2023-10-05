@@ -62,8 +62,10 @@ const LaunchPad = () => {
   useEffect(() => {
     ref.current?.classList.remove("opacity-0")
     ref.current?.classList.remove("scale-150")
+    ref.current?.classList.remove("blur-sm")
     ref.current?.classList.add("opacity-100")
     ref.current?.classList.add("scale-100")
+    ref.current?.classList.add("blur-0")
     return () => {}
   }, [])
 
@@ -82,7 +84,7 @@ const LaunchPad = () => {
         // variants={overlayVariants}
         ref={ref as any}
         className={cn(
-          "w-full h-full relative overflow-hidden  LaunchpadContainer opacity-0  transition-all duration-500 scale-150 ease-in-out",
+          "w-full h-full relative overflow-hidden blur-sm  LaunchpadContainer  opacity-0  transition-all duration-500 scale-150 ease-in-out",
           {}
         )}
       >
