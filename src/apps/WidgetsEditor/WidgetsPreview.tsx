@@ -95,13 +95,13 @@ const WidgetsPreview = ({ widget }: TProps) => {
     // Calculate the difference in positions
     const deltaX = targetRect.left - sourceRect.left
     const deltaY = targetRect.top - sourceRect.top
-    console.log(sourceRect)
+
     // Use Framer Motion to animate the source div
     await sourceControls.start({
       x: sourceRect.x + 250,
-      y: -500,
+      y: -700,
       transition: {
-        duration: 0.7, // Animation duration in seconds
+        duration: 0.5, // Animation duration in seconds
         ease: "anticipate", // Easing function
       },
     })
@@ -110,8 +110,8 @@ const WidgetsPreview = ({ widget }: TProps) => {
       x: deltaX,
       y: deltaY,
       transition: {
-        duration: 0.3, // Animation duration in seconds
-        ease: "easeInOut", // Easing function
+        duration: 0.8, // Animation duration in seconds
+        ease: "anticipate", // Easing function
       },
     })
     sourceDiv.style.opacity = "0"
