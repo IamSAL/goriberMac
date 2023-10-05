@@ -8,7 +8,7 @@ type TProps = {
   apps: IApp[]
 }
 const AppSlides = ({ apps }: TProps) => {
-  const [animeParent, enableAnimations] = useAutoAnimate()
+  const [animeParent, setAnimations] = useAutoAnimate()
 
   return (
     <div className="px-36 h-[70vh] overflow-hidden">

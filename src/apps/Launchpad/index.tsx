@@ -15,8 +15,20 @@ import AppSlides from "./AppSlides"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { Pagination } from "swiper/modules"
+import { motion } from "framer-motion"
 
 const SLIDE_CHUNK_SIZE = 28
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+}
 
 const LaunchPad = () => {
   const dispatch = useDispatch()
@@ -52,7 +64,15 @@ const LaunchPad = () => {
         matchedApps,
       }}
     >
-      <div className="w-full h-full relative overflow-hidden LaunchpadContainer">
+      <motion.div
+        initial="hidden"
+        animate={"visible"}
+        exit="hidden"
+        variants={overlayVariants}
+        className="w-full h-full relative overflow-hidden LaunchpadContainer"
+      >
+        {/* <div className="flex justify-center items-center w-full h-full bg-red-800 bg-opacity-50">TESWT</div> */}
+
         <Image
           src="/static/images/wallpapers/dark.svg"
           className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"
@@ -89,7 +109,7 @@ const LaunchPad = () => {
             </p>
           )}
         </div>
-      </div>
+      </motion.div>
     </LaunchpadContext.Provider>
   )
 }
