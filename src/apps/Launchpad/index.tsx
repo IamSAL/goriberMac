@@ -12,6 +12,11 @@ import { setDockStatus } from "src/core/redux/system/system.slice"
 import { DOCK_STATUS, IApp } from "@types"
 import SearchBar from "./SearchBar"
 import AppSlides from "./AppSlides"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { Pagination } from "swiper/modules"
+
+const SLIDE_CHUNK_SIZE = 28
 
 const LaunchPad = () => {
   const dispatch = useDispatch()
@@ -20,16 +25,21 @@ const LaunchPad = () => {
     return () => {
       dispatch(setDockStatus(DOCK_STATUS.NORMAL))
     }
-  }, [])
+  }, [dispatch])
   const [searchTerm, setsearchTerm] = useState("")
   const [matchedApps, setMatchedApps] = useState<IApp[]>([])
-  const [appChunks, setappChunks] = useState<IApp[][]>([])
-
+  const [appChunks, setappChunks] = useState<IApp[][]>(_.chunk(apps, SLIDE_CHUNK_SIZE))
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<div class=" bg-white rounded-full  ${className}"></div>`
+    },
+  }
   useEffect(() => {
     startTransition(() => {
       const matchingApps = apps.filter((app) => app.name.toLowerCase().includes(searchTerm))
       // setMatchedApps(matchingApps)
-      setappChunks(_.chunk(matchingApps, 28))
+      setappChunks(_.chunk(matchingApps, SLIDE_CHUNK_SIZE))
     })
     return () => {}
   }, [searchTerm])
@@ -42,7 +52,7 @@ const LaunchPad = () => {
         matchedApps,
       }}
     >
-      <div className="w-full h-full relative overflow-hidden">
+      <div className="w-full h-full relative overflow-hidden LaunchpadContainer">
         <Image
           src="/static/images/wallpapers/dark.svg"
           className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"
@@ -54,10 +64,30 @@ const LaunchPad = () => {
 
         <div id="content" className="absolute top-0 left-0 w-full h-full z-20">
           <SearchBar />
-
-          {appChunks.map((chunk, chunkIdx) => {
-            return <AppSlides key={chunkIdx} apps={chunk} />
-          })}
+          {appChunks.length > 0 ? (
+            <Swiper
+              pagination={appChunks.length > 1 ? pagination : false}
+              modules={[Pagination]}
+              className="AppsSlider"
+              spaceBetween={0}
+              slidesPerView={1}
+              initialSlide={0}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {appChunks.map((chunk, chunkIdx) => {
+                return (
+                  <SwiperSlide key={chunkIdx}>
+                    <AppSlides apps={chunk} />
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+          ) : (
+            <p className="text-4xl opacity-40 fade-in-10 font-light text-center h-[60%] flex items-center justify-center">
+              No Results
+            </p>
+          )}
         </div>
       </div>
     </LaunchpadContext.Provider>
