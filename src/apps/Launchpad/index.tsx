@@ -84,7 +84,7 @@ const LaunchPad = () => {
         // variants={overlayVariants}
         ref={ref as any}
         className={cn(
-          "w-full h-full relative overflow-hidden blur-sm  LaunchpadContainer  opacity-0  transition-all duration-500 scale-150 ease-in-out",
+          "w-full h-full relative overflow-hidden blur-sm  LaunchpadContainer  opacity-0  transition-all duration-150 scale-150 ease-in-out",
           {}
         )}
       >
