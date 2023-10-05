@@ -1,17 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ISizes, IWidget } from "@types"
+import { DOCK_STATUS, ISizes, IWidget } from "@types"
 import { apps } from "src/misc/placeholder-data/apps"
 import { v1 as uuid } from "uuid"
 //@ts-expect-error
 const initialState: ISystemState = {
   isMaximized: false,
   widgets: [],
+  DockStatus: DOCK_STATUS.NORMAL,
 }
 
 export const systemSlice = createSlice({
   name: "system",
   initialState,
   reducers: {
+    setDockStatus: (state, action: PayloadAction<DOCK_STATUS>) => {
+      return { ...state, DockStatus: action.payload }
+    },
     setMaximized: (state, action: PayloadAction<boolean>) => {
       return { ...state, isMaximized: action.payload }
     },
@@ -30,7 +34,8 @@ export const systemSlice = createSlice({
   },
 })
 
-export const { setMaximized, addWidget, removeWidget, setWidgets } = systemSlice.actions
+export const { setMaximized, addWidget, removeWidget, setWidgets, setDockStatus } =
+  systemSlice.actions
 export default systemSlice.reducer
 export type ISystemWidget = { id?: string; widget: IWidget; size: ISizes; order?: number }
 interface ISystemState {
@@ -39,6 +44,7 @@ interface ISystemState {
   Display: Display
   Sound: Sound
   widgets: Array<ISystemWidget>
+  DockStatus: DOCK_STATUS
 }
 export interface General {
   Appearance: string

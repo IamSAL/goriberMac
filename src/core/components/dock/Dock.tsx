@@ -6,14 +6,17 @@ import { apps } from "src/misc/placeholder-data/apps"
 import { useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import useMousePosition from "src/helpers/hooks/useMousePosition"
+import { DOCK_STATUS } from "@types"
 // million-ignore
 const Dock = () => {
   const { isTouchingBottom } = useMousePosition({ offsetTop: 0, offsetBottom: 100 })
-  const { isMaximized } = useSelector((state: AppState) => state.system)
+  const { isMaximized, DockStatus } = useSelector((state: AppState) => state.system)
   const isDockHovered = false
 
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
-  const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
+  const shouldShow =
+    (isTouchingBottom || !isMaximized || isDockHovered || DockStatus === DOCK_STATUS.STICKY) &&
+    DockStatus !== DOCK_STATUS.HIDDEN
 
   const allDockApps = runningApps
     .concat(

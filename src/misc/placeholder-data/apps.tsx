@@ -17,7 +17,7 @@ import SystemPreferences from "src/apps/SystemPreferences"
 import VsCode from "src/apps/VsCode"
 import WidgetsEditor from "src/apps/WidgetsEditor"
 import WidgetWeather from "src/core/components/widgets-bar/WidgetWeather"
-import { generateRandomWidgets } from "./generators"
+import { generateRandomApps, generateRandomWidgets } from "./generators"
 
 export const apps: IApp[] = [
   {
@@ -359,4 +359,5 @@ export const apps: IApp[] = [
       template: IAppTemplate.IMMERSIVE,
     },
   },
+  ...generateRandomApps(45),
 ]

@@ -1,6 +1,8 @@
-import { IWidget } from "@types"
+import { IApp, IAppTemplate, IWidget } from "@types"
 import PlaceHolderWidget from "src/core/components/widgets-bar/PlaceHolderWidget"
 import Chance from "chance"
+import AppStore from "src/apps/AppStore"
+const AppIconPlaceHolder = "/static/images/icons/app-icons-placeholder.svg"
 const generateRandomWidgets = (count, appId?): IWidget[] => {
   let chance = new Chance()
 
@@ -19,4 +21,37 @@ const generateRandomWidgets = (count, appId?): IWidget[] => {
   return randomWidgets
 }
 
-export { generateRandomWidgets }
+const generateRandomApps = (count, appId?): IApp[] => {
+  let chance = new Chance()
+
+  let randomApps: IApp[] = []
+
+  for (let i = 1; i <= count; i++) {
+    randomApps.push({
+      id: count + i,
+      name: chance.name({}),
+      icon: AppIconPlaceHolder,
+      status: {},
+      metadata: {
+        title: chance.name({}), // The title of the app
+        description: chance.paragraph(), // A short description or tooltip
+        version: chance.android_id(), // App version number
+      },
+      component: AppStore,
+      config: {
+        isHidden: true,
+        initTitle: chance.name({}),
+        initWindowWidth: 640,
+        initWindowHeight: 480,
+        startMaximized: true,
+        isDefault: true,
+        isPinned: false,
+        template: IAppTemplate.WINDOW,
+      },
+    })
+  }
+
+  return randomApps
+}
+
+export { generateRandomWidgets, generateRandomApps }

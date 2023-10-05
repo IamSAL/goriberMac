@@ -9,6 +9,9 @@ import { apps } from "src/misc/placeholder-data/apps"
 import { DndProvider } from "react-dnd"
 import { HTML5toTouch } from "rdndmb-html5-to-touch"
 import { MultiBackend } from "react-dnd-multi-backend"
+import { DOCK_STATUS } from "@types"
+import { setDockStatus } from "src/core/redux/system/system.slice"
+import { useDispatch } from "react-redux"
 
 type TProps = {
   isEditingMode?: boolean
@@ -29,6 +32,13 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
   const matchedApps = apps.filter((app) =>
     matchedWidgets?.some((widget) => widget.appId === app.id)
   )
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setDockStatus(DOCK_STATUS.HIDDEN))
+    return () => {
+      dispatch(setDockStatus(DOCK_STATUS.NORMAL))
+    }
+  }, [])
 
   useEffect(() => {
     //programRef.current?.focus()

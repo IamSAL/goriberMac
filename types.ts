@@ -120,3 +120,10 @@ export interface IDroppableItem<T> {
   payload: T
   action: keyof typeof DROPPABLE_ACTIONS
 }
+
+export enum DOCK_STATUS {
+  STICKY,
+  NORMAL,
+  HOVER,
+  HIDDEN,
+}
