@@ -1,5 +1,5 @@
 import Image from "next/image"
-import React, { startTransition, useEffect, useMemo, useState, useTransition } from "react"
+import React, { startTransition, useEffect, useMemo, useRef, useState, useTransition } from "react"
 // import IconSearch from '/src/assets/icons/System/Search.svg';
 import { apps } from "src/misc/placeholder-data/apps"
 import AppLauncher from "../../core/components/common/AppLauncher"
@@ -16,13 +16,14 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { Pagination } from "swiper/modules"
 import { motion } from "framer-motion"
+import { cn } from "@utils"
 
 const SLIDE_CHUNK_SIZE = 28
 
 const overlayVariants = {
   hidden: {
     opacity: 0,
-    scale: 1.5,
+    scale: 1.3,
   },
   visible: {
     opacity: 1,
@@ -41,6 +42,8 @@ const LaunchPad = () => {
   const [searchTerm, setsearchTerm] = useState("")
   const [matchedApps, setMatchedApps] = useState<IApp[]>([])
   const [appChunks, setappChunks] = useState<IApp[][]>(_.chunk(apps, SLIDE_CHUNK_SIZE))
+
+  const ref = useRef<HTMLDivElement>()
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -56,6 +59,14 @@ const LaunchPad = () => {
     return () => {}
   }, [searchTerm])
 
+  useEffect(() => {
+    ref.current?.classList.remove("opacity-0")
+    ref.current?.classList.remove("scale-150")
+    ref.current?.classList.add("opacity-100")
+    ref.current?.classList.add("scale-100")
+    return () => {}
+  }, [])
+
   return (
     <LaunchpadContext.Provider
       value={{
@@ -65,11 +76,15 @@ const LaunchPad = () => {
       }}
     >
       <motion.div
-        initial="hidden"
-        animate={"visible"}
-        exit="hidden"
-        variants={overlayVariants}
-        className="w-full h-full relative overflow-hidden LaunchpadContainer"
+        // initial="hidden"
+        // animate={"visible"}
+        // exit="hidden"
+        // variants={overlayVariants}
+        ref={ref as any}
+        className={cn(
+          "w-full h-full relative overflow-hidden  LaunchpadContainer opacity-0  transition-all duration-500 scale-150 ease-in-out",
+          {}
+        )}
       >
         {/* <div className="flex justify-center items-center w-full h-full bg-red-800 bg-opacity-50">TESWT</div> */}
 
