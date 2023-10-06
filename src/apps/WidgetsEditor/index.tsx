@@ -12,9 +12,19 @@ import { MultiBackend } from "react-dnd-multi-backend"
 import { DOCK_STATUS } from "@types"
 import { setDockStatus } from "src/core/redux/system/system.slice"
 import { useDispatch } from "react-redux"
+import { Variants, motion } from "framer-motion"
 
 type TProps = {
   isEditingMode?: boolean
+}
+
+const overlayVariants: Variants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
 }
 const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
   const [searchTerm, setsearchTerm] = useState("")
@@ -61,7 +71,11 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
         }}
       >
         {isEditing ? (
-          <div
+          <motion.div
+            initial="hidden"
+            animate={"visible"}
+            exit="hidden"
+            variants={overlayVariants}
             className="w-full h-full relative overflow-hidden"
             tabIndex={0}
             ref={programRef}
@@ -87,7 +101,7 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ) : (
           <WidgetsSlotBar />
         )}

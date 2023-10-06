@@ -20,6 +20,15 @@ import { cn } from "@utils"
 
 const SLIDE_CHUNK_SIZE = 28
 
+const containerVariants = {
+  hidden: {
+    opacity: 0.25,
+  },
+  visible: {
+    opacity: 1,
+  },
+}
+
 const overlayVariants = {
   hidden: {
     opacity: 0,
@@ -67,14 +76,7 @@ const LaunchPad = () => {
         matchedApps,
       }}
     >
-      <motion.div
-        initial="hidden"
-        animate={"visible"}
-        exit="hidden"
-        variants={overlayVariants}
-        ref={ref as any}
-        className={cn("w-full h-full relative overflow-hidden  LaunchpadContainer  ", {})}
-      >
+      <div className={cn("w-full h-full relative overflow-hidden  LaunchpadContainer  ", {})}>
         {/* <div className="flex justify-center items-center w-full h-full bg-red-800 bg-opacity-50">TESWT</div> */}
 
         <Image
@@ -84,9 +86,22 @@ const LaunchPad = () => {
           width={100}
           height={100}
         />
-        <div className="w-full h-full blur-lg absolute top-0 bottom-0 bg-black bg-opacity-50 scale-125 z-10"></div>
+        <motion.div
+          initial="hidden"
+          animate={"visible"}
+          exit="hidden"
+          variants={containerVariants}
+          className="w-full h-full blur-lg absolute top-0 bottom-0 bg-black bg-opacity-50 scale-125 z-10"
+        ></motion.div>
 
-        <div id="content" className="absolute top-0 left-0 w-full h-full z-20">
+        <motion.div
+          initial="hidden"
+          animate={"visible"}
+          exit="hidden"
+          variants={overlayVariants}
+          id="content"
+          className="absolute top-0 left-0 w-full h-full z-20"
+        >
           <SearchBar />
           {appChunks.length > 0 ? (
             <Swiper
@@ -112,8 +127,8 @@ const LaunchPad = () => {
               No Results
             </p>
           )}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </LaunchpadContext.Provider>
   )
 }
