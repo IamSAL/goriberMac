@@ -25,7 +25,7 @@ export const apps: IApp[] = [
     name: "Weather",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "",
+      png: "/static/images/icons/PNG/ios-weather.png",
     },
     status: {},
     metadata: {
@@ -73,7 +73,7 @@ export const apps: IApp[] = [
     name: "Finder",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Finder.png",
     },
     status: {},
     metadata: {
@@ -98,7 +98,7 @@ export const apps: IApp[] = [
     name: "Launchpad",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Launchpad.png",
     },
     status: {},
     metadata: {
@@ -124,7 +124,7 @@ export const apps: IApp[] = [
     name: "App Store",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/App-store.png",
     },
     status: {},
     metadata: {
@@ -149,7 +149,7 @@ export const apps: IApp[] = [
     name: "Mail",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Mail.png",
     },
     status: {},
     metadata: {
@@ -175,7 +175,7 @@ export const apps: IApp[] = [
     name: "Safari",
     icon: {
       svg: "/static/images/icons/app-icons-safari.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Safari.png",
     },
     status: {},
     metadata: {
@@ -228,7 +228,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Settings.png",
     },
     metadata: {
       title: "System Preferences", // The title of the app
@@ -252,7 +252,7 @@ export const apps: IApp[] = [
     name: "Calendar",
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Calendar.png",
     },
     status: {},
     metadata: {
@@ -279,7 +279,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/app-icons-messages.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Messages.png",
     },
     metadata: {
       title: "Messages", // The title of the app
@@ -305,7 +305,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/app-icons-maps.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Maps.png",
     },
     metadata: {
       title: "Maps", // The title of the app
@@ -330,7 +330,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/app-icons-contacts.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/Contacts.png",
     },
     metadata: {
       title: "Contacts", // The title of the app
@@ -356,7 +356,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/vscode-app.png",
+      png: "/static/images/icons/PNG/vscode-app.png",
     },
     metadata: {
       title: "Visual Studio Code", // The title of the app
@@ -381,7 +381,7 @@ export const apps: IApp[] = [
     status: {},
     icon: {
       svg: "/static/images/icons/ios-weather.svg",
-      png: "/static/images/icons/PNG/Photos.png",
+      png: "/static/images/icons/PNG/widget-icon.png",
     },
     metadata: {
       title: "Widgets", // The title of the app
