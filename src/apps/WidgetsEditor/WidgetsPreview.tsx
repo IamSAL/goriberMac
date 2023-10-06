@@ -101,7 +101,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
       x: sourceRect.x + 250,
       y: -700,
       transition: {
-        duration: 0.5, // Animation duration in seconds
+        duration: 0.3, // Animation duration in seconds
         ease: "anticipate", // Easing function
       },
     })
@@ -110,7 +110,7 @@ const WidgetsPreview = ({ widget }: TProps) => {
       x: deltaX,
       y: deltaY,
       transition: {
-        duration: 0.8, // Animation duration in seconds
+        duration: 0.6, // Animation duration in seconds
         ease: "anticipate", // Easing function
       },
     })
