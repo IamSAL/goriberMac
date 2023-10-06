@@ -7,7 +7,13 @@ const withPWA = require("next-pwa")
 /**
  * @type {import('@blitzjs/next').BlitzConfig}
  **/
-const config = {}
+const config = {
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+}
 
 module.exports = million.next(withBlitz(withSVGr(config)), {
   auto: {

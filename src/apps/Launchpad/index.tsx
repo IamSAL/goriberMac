@@ -59,16 +59,6 @@ const LaunchPad = () => {
     return () => {}
   }, [searchTerm])
 
-  useEffect(() => {
-    ref.current?.classList.remove("opacity-0")
-    ref.current?.classList.remove("scale-150")
-    ref.current?.classList.remove("blur-sm")
-    ref.current?.classList.add("opacity-100")
-    ref.current?.classList.add("scale-100")
-    ref.current?.classList.add("blur-0")
-    return () => {}
-  }, [])
-
   return (
     <LaunchpadContext.Provider
       value={{
@@ -78,20 +68,17 @@ const LaunchPad = () => {
       }}
     >
       <motion.div
-        // initial="hidden"
-        // animate={"visible"}
-        // exit="hidden"
-        // variants={overlayVariants}
+        initial="hidden"
+        animate={"visible"}
+        exit="hidden"
+        variants={overlayVariants}
         ref={ref as any}
-        className={cn(
-          "w-full h-full relative overflow-hidden blur-sm  LaunchpadContainer  opacity-0  transition-all duration-150 scale-150 ease-in-out",
-          {}
-        )}
+        className={cn("w-full h-full relative overflow-hidden  LaunchpadContainer  ", {})}
       >
         {/* <div className="flex justify-center items-center w-full h-full bg-red-800 bg-opacity-50">TESWT</div> */}
 
         <Image
-          src="/static/images/wallpapers/dark.svg"
+          src="/static/images/wallpapers/dark.png"
           className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"
           alt="launchpad-bg"
           width={100}
