@@ -1,6 +1,6 @@
 import React from "react"
 import Image from "next/image"
-const AppIconPlaceHolder = "/static/images/icons/app-icons-placeholder.svg"
+const AppIconPlaceHolder = "/static/images/icons/PNG/app-icons-placeholder.png"
 import { IApp } from "@types"
 import NiceModal from "@ebay/nice-modal-react"
 import AppLauncher from "../common/AppLauncher"
@@ -24,7 +24,7 @@ const DockItem = ({ app }: TDockItemProps) => {
             <div className="flex-col justify-start items-center gap-1 inline-flex px-1">
               <div className="w-12 h-12 relative ">
                 <Image
-                  src={app?.icon || AppIconPlaceHolder}
+                  src={app?.icon.png || AppIconPlaceHolder}
                   width={75}
                   height={75}
                   alt="finder"

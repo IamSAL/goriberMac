@@ -23,7 +23,10 @@ export const apps: IApp[] = [
   {
     id: 13,
     name: "Weather",
-    icon: "/static/images/icons/ios-weather.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "",
+    },
     status: {},
     metadata: {
       title: "Weather", // The title of the app
@@ -68,7 +71,10 @@ export const apps: IApp[] = [
   {
     id: 0,
     name: "Finder",
-    icon: "/static/images/icons/app-icons-finder.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "Finder", // The title of the app
@@ -90,7 +96,10 @@ export const apps: IApp[] = [
   {
     id: 1,
     name: "Launchpad",
-    icon: "/static/images/icons/app-icons-launchpad.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "Launchpad", // The title of the app
@@ -113,7 +122,10 @@ export const apps: IApp[] = [
   {
     id: 2,
     name: "App Store",
-    icon: "/static/images/icons/app-icons-app-store.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "AppStore", // The title of the app
@@ -135,7 +147,10 @@ export const apps: IApp[] = [
   {
     id: 3,
     name: "Mail",
-    icon: "/static/images/icons/app-icons-mail.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "Mail", // The title of the app
@@ -158,7 +173,10 @@ export const apps: IApp[] = [
   {
     id: 4,
     name: "Safari",
-    icon: "/static/images/icons/app-icons-safari.svg",
+    icon: {
+      svg: "/static/images/icons/app-icons-safari.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "Launchpad", // The title of the app
@@ -181,14 +199,16 @@ export const apps: IApp[] = [
   {
     id: 5,
     name: "Photos",
-
-    icon: "/static/images/icons/app-icons-photos.svg",
-    status: {},
+    icon: {
+      svg: "/static/images/icons/app-icons-photos.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "Photos", // The title of the app
       description: "System default launcher", // A short description or tooltip
       version: "0.0.1", // App version number
     },
+    status: {},
     component: Photos,
     config: {
       isHidden: false,
@@ -205,8 +225,11 @@ export const apps: IApp[] = [
   {
     id: 6,
     name: "System Preferences",
-    icon: "/static/images/icons/app-icons-system-preferences.svg",
     status: {},
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "System Preferences", // The title of the app
       description: "System default launcher", // A short description or tooltip
@@ -227,7 +250,10 @@ export const apps: IApp[] = [
   {
     id: 7,
     name: "Calendar",
-    icon: "/static/images/icons/app-icons-calendar.svg",
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     status: {},
     metadata: {
       title: "Calendar", // The title of the app
@@ -250,8 +276,11 @@ export const apps: IApp[] = [
   {
     id: 8,
     name: "Messages",
-    icon: "/static/images/icons/app-icons-messages.svg",
     status: {},
+    icon: {
+      svg: "/static/images/icons/app-icons-messages.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "Messages", // The title of the app
       description: "System default launcher", // A short description or tooltip
@@ -273,8 +302,11 @@ export const apps: IApp[] = [
   {
     id: 9,
     name: "Maps",
-    icon: "/static/images/icons/app-icons-maps.svg",
     status: {},
+    icon: {
+      svg: "/static/images/icons/app-icons-maps.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "Maps", // The title of the app
       description: "System default launcher", // A short description or tooltip
@@ -295,8 +327,11 @@ export const apps: IApp[] = [
   {
     id: 10,
     name: "Contacts",
-    icon: "/static/images/icons/app-icons-contacts.svg",
     status: {},
+    icon: {
+      svg: "/static/images/icons/app-icons-contacts.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "Contacts", // The title of the app
       description: "System default launcher", // A short description or tooltip
@@ -318,8 +353,11 @@ export const apps: IApp[] = [
   {
     id: 11,
     name: "Visual Studio Code",
-    icon: "/static/images/icons/vscode-app.png",
     status: {},
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/vscode-app.png",
+    },
     metadata: {
       title: "Visual Studio Code", // The title of the app
       description: "System default launcher", // A short description or tooltip
@@ -340,8 +378,11 @@ export const apps: IApp[] = [
   {
     id: 12,
     name: "Widgets Editor",
-    icon: "/static/images/icons/widget-icon.png",
     status: {},
+    icon: {
+      svg: "/static/images/icons/ios-weather.svg",
+      png: "/static/images/icons/PNG/Photos.png",
+    },
     metadata: {
       title: "Widgets", // The title of the app
       description: "System default launcher", // A short description or tooltip

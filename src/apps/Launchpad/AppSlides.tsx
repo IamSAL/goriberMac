@@ -20,7 +20,7 @@ const AppSlides = ({ apps }: TProps) => {
                 className="flex flex-col justify-center items-center gap-2 text-center "
                 key={app.id}
               >
-                <Image src={app.icon} width={95} height={95} alt={app.name} />
+                <Image src={app.icon.png} width={95} height={95} alt={app.name} />
                 <h4 className="text-white font-light text-sm">{app.name}</h4>
               </div>
             </AppLauncher>

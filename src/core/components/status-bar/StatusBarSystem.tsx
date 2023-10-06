@@ -54,7 +54,7 @@ const StatusBarSystem = () => {
                     <DropdownMenuItem key={app.id}>
                       <AppLauncher appId={app.id}>
                         <div className="flex">
-                          <Image src={app.icon} width={18} height={18} alt={app.name} />
+                          <Image src={app.icon.png} width={18} height={18} alt={app.name} />
                           <span className="ml-1">{app.name}</span>
                         </div>
                       </AppLauncher>

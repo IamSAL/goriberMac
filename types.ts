@@ -37,7 +37,10 @@ export interface IApp {
   // Basic Information
   id: number
   name: string
-  icon: string
+  icon: {
+    svg: string
+    png: string
+  }
   // Status and Behavior
   status: Partial<TAppStatus>
   // Metadata

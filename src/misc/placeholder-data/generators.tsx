@@ -30,7 +30,10 @@ const generateRandomApps = (count, appId?): IApp[] => {
     randomApps.push({
       id: count + i,
       name: chance.name({}),
-      icon: AppIconPlaceHolder,
+      icon: {
+        svg: AppIconPlaceHolder,
+        png: "/static/images/icons/PNG/app-icons-placeholder.png",
+      },
       status: {},
       metadata: {
         title: chance.name({}), // The title of the app
