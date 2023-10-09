@@ -92,11 +92,11 @@ const WidgetsEditor = ({ isEditingMode = true }: TProps) => {
 
             <div id="content" className="absolute top-0 left-0 w-full h-full z-20 fade-in-100">
               <div className="flex justify-between">
-                <div className="flex-[30%] justify-start">
+                <div className="flex-[20%] justify-start">
                   {" "}
                   <WidgetsSearchForm />
                 </div>
-                <div className="flex-[70%] relative">
+                <div className="flex-[80%] relative">
                   <WidgetsSearchResult />
                 </div>
               </div>

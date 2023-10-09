@@ -109,11 +109,12 @@ const WidgetsSlotBar = () => {
         {" "}
         <div
           className={cn(
-            "widgets-bar bg-gradient-to-l to-[#46464600] from-[#cccccc00]  p-8 min-w-[384px]  flex flex-wrap "
+            "widgets-bar bg-gradient-to-l to-[#46464600] from-[#cccccc00]  p-8 max-w-[384px]  flex flex-wrap ",
             // {
             //   " bg-gradient-to-l to-transparent from-[#cccccc2a] transition-all duration-500":
             //     collectedProps.canDrop,
             // }
+            { "min-w-[384px]": widgetsList.length === 0 }
           )}
           ref={animeParent}
         >
