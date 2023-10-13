@@ -76,7 +76,7 @@ const WidgetsSearchForm = () => {
                 )}
               >
                 <div className="AppIconsCalendar w-5 h-5 relative shadow">
-                  <Image src={app.icon} width={26} height={26} alt={app.name} />
+                  <Image src={app.icon.png} width={26} height={26} alt={app.name} />
                 </div>
                 <div className="Text text-white text-xs font-normal font-['SF Pro Text'] leading-none">
                   {app.name}

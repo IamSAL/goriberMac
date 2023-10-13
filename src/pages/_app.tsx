@@ -33,12 +33,7 @@ function RootErrorFallback({ error }: ErrorFallbackProps) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const getLayout = Component.getLayout || ((page) => page)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const loader = document.getElementById("globalLoader")
-      if (loader) loader.remove()
-    }
-  }, [])
+
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}

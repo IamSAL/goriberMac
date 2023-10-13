@@ -1,5 +1,6 @@
 import { SimpleRolesIsAuthorized } from "@blitzjs/auth"
 import { User } from "db"
+import { as } from "vitest/dist/types-de0e0997"
 
 export type Role = "ADMIN" | "USER"
 
@@ -19,10 +20,11 @@ export type TAppStatus = {
   isFOREGROUND: boolean
   isHidden: boolean
 }
-
+export type ISizes = "S" | "M" | "L"
 export type WidgetProps = {
-  size?: "S" | "M" | "L"
+  size?: ISizes
   className?: string
+  isEditing?: boolean
 }
 export interface IWidget {
   name: string
@@ -35,7 +37,10 @@ export interface IApp {
   // Basic Information
   id: number
   name: string
-  icon: string
+  icon: {
+    svg: string
+    png: string
+  }
   // Status and Behavior
   status: Partial<TAppStatus>
   // Metadata
@@ -102,4 +107,26 @@ export interface IMenuItem {
   action: () => void // Function to execute when the item is clicked
   isEnabled: boolean // Is the item enabled (clickable)?
   // Other menu item-specific properties (e.g., icons)
+}
+
+export const DROPPABLES = {
+  WIDGET: "WIDGET",
+  SYSTEM_WIDGET: "SYSTEM_WIDGET",
+} as const
+
+export const DROPPABLE_ACTIONS = {
+  COPY: "COPY",
+  MOVE: "MOVE",
+} as const
+
+export interface IDroppableItem<T> {
+  payload: T
+  action: keyof typeof DROPPABLE_ACTIONS
+}
+
+export enum DOCK_STATUS {
+  STICKY,
+  NORMAL,
+  HOVER,
+  HIDDEN,
 }

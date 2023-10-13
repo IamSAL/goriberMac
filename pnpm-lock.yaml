@@ -21,6 +21,7 @@ specifiers:
   "@testing-library/react": 13.4.0
   "@testing-library/react-hooks": 8.0.1
   "@types/chance": 1.1.4
+  "@types/lodash": 4.14.199
   "@types/node": 18.11.9
   "@types/preview-email": 2.0.1
   "@types/react": 18.0.25
@@ -36,8 +37,10 @@ specifiers:
   eslint-config-prettier: 8.5.0
   framer-motion: 10.16.4
   husky: 8.0.2
+  immutability-helper: 3.1.1
   jsdom: 20.0.3
   lint-staged: 13.0.3
+  lodash: 4.17.21
   lucide-react: 0.274.0
   million: 2.6.0
   next: 13.4.5
@@ -48,8 +51,13 @@ specifiers:
   pretty-quick: 3.1.3
   preview-email: 3.0.7
   prisma: 4.6.1
+  rdndmb-html5-to-touch: 8.0.3
   re-resizable: 6.9.11
   react: 18.2.0
+  react-dnd: 16.0.1
+  react-dnd-html5-backend: 16.0.1
+  react-dnd-multi-backend: 8.0.3
+  react-dnd-preview: 8.0.3
   react-dom: 18.2.0
   react-draggable: 4.4.5
   react-hook-form: 7.46.1
@@ -60,10 +68,12 @@ specifiers:
   redux-persist: 6.0.0
   sass: 1.66.1
   secure-password: 4.0.0
+  swiper: 10.3.1
   tailwind-merge: 1.14.0
   tailwindcss: 3.x
   tailwindcss-animate: 1.0.7
   typescript: ^4.8.4
+  uuid: 9.0.1
   vite-tsconfig-paths: 3.6.0
   vitest: 0.25.3
   zod: 3.20.2
@@ -85,20 +95,28 @@ dependencies:
   "@reduxjs/toolkit": 1.9.5_nnem43rer6rxr5uhc4j6bxdlmm
   "@svgr/webpack": 8.1.0_typescript@4.9.5
   "@types/chance": 1.1.4
+  "@types/lodash": 4.14.199
   autoprefixer: 10.4.15_postcss@8.4.29
   blitz: 2.0.0-beta.32_t2onre2iphfojnae77env6h7am
   chance: 1.1.11
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   framer-motion: 10.16.4_biqbaboplfbrettd7655fr4n2y
+  immutability-helper: 3.1.1
+  lodash: 4.17.21
   lucide-react: 0.274.0_react@18.2.0
   million: 2.6.0
   next: 13.4.5_tmjnz6z74jqyaklcl2ti4hi67a
   next-pwa: 5.6.0_next@13.4.5
   postcss: 8.4.29
   prisma: 4.6.1
+  rdndmb-html5-to-touch: 8.0.3
   re-resizable: 6.9.11_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
+  react-dnd: 16.0.1_k5dgqucelrjpjmc2o4g7c3ljbq
+  react-dnd-html5-backend: 16.0.1
+  react-dnd-multi-backend: 8.0.3_b57ckgxx77373rey5kttpzfpiu
+  react-dnd-preview: 8.0.3_ajxydgv6wvb6awzgtymnmahb3a
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
   react-hook-form: 7.46.1_react@18.2.0
@@ -109,9 +127,11 @@ dependencies:
   redux-persist: 6.0.0_react@18.2.0+redux@4.2.1
   sass: 1.66.1
   secure-password: 4.0.0
+  swiper: 10.3.1
   tailwind-merge: 1.14.0
   tailwindcss: 3.3.3
   tailwindcss-animate: 1.0.7_tailwindcss@3.3.3
+  uuid: 9.0.1
   zod: 3.20.2
 
 devDependencies:
@@ -4298,6 +4318,27 @@ packages:
       "@babel/runtime": 7.22.15
     dev: false
 
+  /@react-dnd/asap/5.0.2:
+    resolution:
+      {
+        integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==,
+      }
+    dev: false
+
+  /@react-dnd/invariant/4.0.2:
+    resolution:
+      {
+        integrity: sha512-xKCTqAK/FFauOM9Ta2pswIyT3D8AQlfrYdOi/toTPEhqCuAs1v5tcJ3Y08Izh1cJ5Jchwy9SeAXmMg6zrKs2iw==,
+      }
+    dev: false
+
+  /@react-dnd/shallowequal/4.0.2:
+    resolution:
+      {
+        integrity: sha512-/RVXdLvJxLg4QKvMoM5WlwNR9ViO9z8B/qPcc+C0Sa/teJY7QG7kJ441DwzOjMYEY7GmU4dj5EcGHIkKZiQZCA==,
+      }
+    dev: false
+
   /@reduxjs/toolkit/1.9.5_nnem43rer6rxr5uhc4j6bxdlmm:
     resolution:
       {
@@ -5227,6 +5268,13 @@ packages:
       }
     dependencies:
       "@types/node": 18.11.9
+    dev: false
+
+  /@types/lodash/4.14.199:
+    resolution:
+      {
+        integrity: sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==,
+      }
     dev: false
 
   /@types/mime/1.3.2:
@@ -7841,6 +7889,26 @@ packages:
       }
     dev: false
 
+  /dnd-core/16.0.1:
+    resolution:
+      {
+        integrity: sha512-HK294sl7tbw6F6IeuK16YSBUoorvHpY8RHO+9yFfaJyCDVb6n7PRcezrOEOa2SBCqiYpemh5Jx20ZcjKdFAVng==,
+      }
+    dependencies:
+      "@react-dnd/asap": 5.0.2
+      "@react-dnd/invariant": 4.0.2
+      redux: 4.2.1
+    dev: false
+
+  /dnd-multi-backend/8.0.3:
+    resolution:
+      {
+        integrity: sha512-yFFARotr+OEJk787Fsj+V52pi6j7+Pt/CRp3IR2Ai3fnxA/z6J54T7+gxkXzXu4cvxTNE7NiBzzAaJ2f7JjFTw==,
+      }
+    peerDependencies:
+      dnd-core: ^16.0.1
+    dev: false
+
   /doctrine/2.1.0:
     resolution:
       {
@@ -10372,6 +10440,13 @@ packages:
     resolution:
       {
         integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==,
+      }
+    dev: false
+
+  /immutability-helper/3.1.1:
+    resolution:
+      {
+        integrity: sha512-Q0QaXjPjwIju/28TsugCHNEASwoCcJSyJV3uO1sOIQGI0jKgm9f41Lvz0DZj3n46cNCyAZTsEYoY4C2bVRUzyQ==,
       }
     dev: false
 
@@ -13856,6 +13931,19 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
+  /rdndmb-html5-to-touch/8.0.3:
+    resolution:
+      {
+        integrity: sha512-VfIbLjlL9NAnZzc2M5fGPCNkDyK12+ahgILGO5RjS7jkgUlxwB0c/XvxVQNfY/2ocg7isTY/G7tqxJk5fSTZAA==,
+      }
+    dependencies:
+      dnd-multi-backend: 8.0.3
+      react-dnd-html5-backend: 16.0.1
+      react-dnd-touch-backend: 16.0.1
+    transitivePeerDependencies:
+      - dnd-core
+    dev: false
+
   /re-resizable/6.9.11_biqbaboplfbrettd7655fr4n2y:
     resolution:
       {
@@ -13880,6 +13968,84 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: false
+
+  /react-dnd-html5-backend/16.0.1:
+    resolution:
+      {
+        integrity: sha512-Wu3dw5aDJmOGw8WjH1I1/yTH+vlXEL4vmjk5p+MHxP8HuHJS1lAGeIdG/hze1AvNeXWo/JgULV87LyQOr+r5jw==,
+      }
+    dependencies:
+      dnd-core: 16.0.1
+    dev: false
+
+  /react-dnd-multi-backend/8.0.3_b57ckgxx77373rey5kttpzfpiu:
+    resolution:
+      {
+        integrity: sha512-IwH7Mf6R05KIFohX0hHMTluoAvuUD8SO15KCD+9fY0nJ4nc1FGCMCSyMZw8R1XNStKp+JnNg3ZMtiaf5DebSUg==,
+      }
+    peerDependencies:
+      dnd-core: ^16.0.1
+      react: ^16.14.0 || ^17.0.2 || ^18.0.0
+      react-dnd: ^16.0.1
+      react-dom: ^16.14.0 || ^17.0.2 || ^18.0.0
+    dependencies:
+      dnd-multi-backend: 8.0.3
+      react: 18.2.0
+      react-dnd: 16.0.1_k5dgqucelrjpjmc2o4g7c3ljbq
+      react-dnd-preview: 8.0.3_ajxydgv6wvb6awzgtymnmahb3a
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /react-dnd-preview/8.0.3_ajxydgv6wvb6awzgtymnmahb3a:
+    resolution:
+      {
+        integrity: sha512-s69Ro47QYDthDhj73iQ0VioMCjtlZ1AytKBDkQaHKm5DTjA8D2bIaFKCBQd330QEW0SIzqLJrZGCSlIY2xraJg==,
+      }
+    peerDependencies:
+      react: ^16.14.0 || ^17.0.2 || ^18.0.0
+      react-dnd: ^16.0.1
+    dependencies:
+      react: 18.2.0
+      react-dnd: 16.0.1_k5dgqucelrjpjmc2o4g7c3ljbq
+    dev: false
+
+  /react-dnd-touch-backend/16.0.1:
+    resolution:
+      {
+        integrity: sha512-NonoCABzzjyWGZuDxSG77dbgMZ2Wad7eQiCd/ECtsR2/NBLTjGksPUx9UPezZ1nQ/L7iD130Tz3RUshL/ClKLA==,
+      }
+    dependencies:
+      "@react-dnd/invariant": 4.0.2
+      dnd-core: 16.0.1
+    dev: false
+
+  /react-dnd/16.0.1_k5dgqucelrjpjmc2o4g7c3ljbq:
+    resolution:
+      {
+        integrity: sha512-QeoM/i73HHu2XF9aKksIUuamHPDvRglEwdHL4jsp784BgUuWcg6mzfxT0QDdQz8Wj0qyRKx2eMg8iZtWvU4E2Q==,
+      }
+    peerDependencies:
+      "@types/hoist-non-react-statics": ">= 3.3.1"
+      "@types/node": ">= 12"
+      "@types/react": ">= 16"
+      react: ">= 16.14"
+    peerDependenciesMeta:
+      "@types/hoist-non-react-statics":
+        optional: true
+      "@types/node":
+        optional: true
+      "@types/react":
+        optional: true
+    dependencies:
+      "@react-dnd/invariant": 4.0.2
+      "@react-dnd/shallowequal": 4.0.2
+      "@types/node": 18.11.9
+      "@types/react": 18.0.25
+      dnd-core: 16.0.1
+      fast-deep-equal: 3.1.3
+      hoist-non-react-statics: 3.3.2
+      react: 18.2.0
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:
@@ -15585,6 +15751,14 @@ packages:
       picocolors: 1.0.0
     dev: false
 
+  /swiper/10.3.1:
+    resolution:
+      {
+        integrity: sha512-24Wk3YUdZHxjc9faID97GTu6xnLNia+adMt6qMTZG/HgdSUt4fS0REsGUXJOgpTED0Amh/j+gRGQxsLayJUlBQ==,
+      }
+    engines: { node: ">= 4.7.0" }
+    dev: false
+
   /symbol-tree/3.2.4:
     resolution:
       {
@@ -16444,6 +16618,14 @@ packages:
       }
     hasBin: true
     dev: true
+
+  /uuid/9.0.1:
+    resolution:
+      {
+        integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==,
+      }
+    hasBin: true
+    dev: false
 
   /v8-compile-cache-lib/3.0.1:
     resolution:

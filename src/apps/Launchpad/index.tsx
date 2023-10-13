@@ -1,24 +1,73 @@
 import Image from "next/image"
-import React, { useState, useTransition } from "react"
+import React, { startTransition, useEffect, useMemo, useRef, useState, useTransition } from "react"
 // import IconSearch from '/src/assets/icons/System/Search.svg';
 import { apps } from "src/misc/placeholder-data/apps"
 import AppLauncher from "../../core/components/common/AppLauncher"
 import { LaunchpadContext } from "./context"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
+import * as _ from "lodash"
+import { useEffectOnce } from "react-use"
+import { useDispatch } from "react-redux"
+import { setDockStatus } from "src/core/redux/system/system.slice"
+import { DOCK_STATUS, IApp } from "@types"
+import SearchBar from "./SearchBar"
+import AppSlides from "./AppSlides"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { Pagination } from "swiper/modules"
+import { motion } from "framer-motion"
+import { cn } from "@utils"
+
+const SLIDE_CHUNK_SIZE = 28
+
+const containerVariants = {
+  hidden: {
+    opacity: 0.25,
+  },
+  visible: {
+    opacity: 1,
+  },
+}
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.3,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+}
 
 const LaunchPad = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setDockStatus(DOCK_STATUS.STICKY))
+    return () => {
+      dispatch(setDockStatus(DOCK_STATUS.NORMAL))
+    }
+  }, [dispatch])
   const [searchTerm, setsearchTerm] = useState("")
+  const [matchedApps, setMatchedApps] = useState<IApp[]>([])
+  const [appChunks, setappChunks] = useState<IApp[][]>(_.chunk(apps, SLIDE_CHUNK_SIZE))
 
-  const [isTransitioning, startTransition] = useTransition()
-
-  function updateSearchTerm(term: string) {
-    startTransition(() => {
-      setsearchTerm(term)
-    })
+  const ref = useRef<HTMLDivElement>()
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return `<div class=" bg-white rounded-full  ${className}"></div>`
+    },
   }
+  useEffect(() => {
+    startTransition(() => {
+      const matchingApps = apps.filter((app) => app.name.toLowerCase().includes(searchTerm))
+      // setMatchedApps(matchingApps)
+      setappChunks(_.chunk(matchingApps, SLIDE_CHUNK_SIZE))
+    })
+    return () => {}
+  }, [searchTerm])
 
-  const matchedApps = apps.filter((app) => app.name.toLowerCase().includes(searchTerm))
-  const [animeParent, enableAnimations] = useAutoAnimate()
   return (
     <LaunchpadContext.Provider
       value={{
@@ -27,54 +76,58 @@ const LaunchPad = () => {
         matchedApps,
       }}
     >
-      <div className="w-full h-full relative overflow-hidden">
+      <div className={cn("w-full h-full relative overflow-hidden  LaunchpadContainer  ", {})}>
+        {/* <div className="flex justify-center items-center w-full h-full bg-red-800 bg-opacity-50">TESWT</div> */}
+
         <Image
-          src="/static/images/wallpapers/dark.svg"
+          src="/static/images/wallpapers/dark.png"
           className="w-full h-full blur-lg absolute top-0 bottom-0 scale-125 z-10"
           alt="launchpad-bg"
           width={100}
           height={100}
         />
-        <div className="w-full h-full blur-lg absolute top-0 bottom-0 bg-black bg-opacity-50 scale-125 z-10"></div>
+        <motion.div
+          initial="hidden"
+          animate={"visible"}
+          exit="hidden"
+          variants={containerVariants}
+          className="w-full h-full blur-lg absolute top-0 bottom-0 bg-black bg-opacity-50 scale-125 z-10"
+        ></motion.div>
 
-        <div id="content" className="absolute top-0 left-0 w-full h-full z-20">
-          <div className="flex justify-center w-full my-12">
-            <form className="flex items-center" action="#">
-              <label htmlFor="voice-search" className="sr-only">
-                Search
-              </label>
-              <div className="relative w-full">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  {/* <IconControl /> */}
-                </div>
-                <input
-                  type="text"
-                  id="voice-search"
-                  //@ts-expect-error
-                  onInput={(e) => updateSearchTerm(e.target.value?.toLowerCase() || "")}
-                  className="bg-gray-500 border border-gray-600 text-sm rounded-lg text-white block w-full pl-10 p-2 bg-opacity-25 h-8"
-                  placeholder="Search"
-                  required
-                />
-              </div>
-            </form>
-          </div>
-          <div className="apps grid gap-10 grid-cols-7" ref={animeParent}>
-            {matchedApps?.map((app, idx) => {
-              return (
-                <AppLauncher key={app.id} appId={app.id}>
-                  <div
-                    className="flex flex-col justify-center items-center gap-2 text-center "
-                    key={app.id}
-                  >
-                    <Image src={app.icon} width={75} height={75} alt={app.name} />
-                    <h4 className="text-white font-light text-sm">{app.name}</h4>
-                  </div>
-                </AppLauncher>
-              )
-            })}
-          </div>
-        </div>
+        <motion.div
+          initial="hidden"
+          animate={"visible"}
+          exit="hidden"
+          variants={overlayVariants}
+          id="content"
+          className="absolute top-0 left-0 w-full h-full z-20"
+        >
+          <SearchBar />
+          {appChunks.length > 0 ? (
+            <Swiper
+              pagination={appChunks.length > 1 ? pagination : false}
+              modules={[Pagination]}
+              className="AppsSlider"
+              spaceBetween={0}
+              slidesPerView={1}
+              initialSlide={0}
+              onSlideChange={() => console.log("slide change")}
+              onSwiper={(swiper) => console.log(swiper)}
+            >
+              {appChunks.map((chunk, chunkIdx) => {
+                return (
+                  <SwiperSlide key={chunkIdx}>
+                    <AppSlides apps={chunk} />
+                  </SwiperSlide>
+                )
+              })}
+            </Swiper>
+          ) : (
+            <p className="text-4xl opacity-40 fade-in-10 font-light text-center h-[60%] flex items-center justify-center">
+              No Results
+            </p>
+          )}
+        </motion.div>
       </div>
     </LaunchpadContext.Provider>
   )

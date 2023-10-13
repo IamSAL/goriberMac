@@ -27,6 +27,15 @@ i {
   box-sizing: border-box;
 }
 
+* {
+  // user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  // -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .dock-container {
   position: absolute;
   bottom: 12px;
@@ -38,5 +47,25 @@ i {
 .AppsContainer {
   & > .SingleApp.min {
     position: absolute;
+  }
+}
+
+.LaunchpadContainer {
+  .AppsSlider {
+    .swiper-pagination {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      .swiper-pagination-bullet {
+        cursor: pointer;
+        opacity: 0.5;
+        transition: all 0.5s;
+        padding: 5px;
+      }
+      .swiper-pagination-bullet-active {
+        opacity: 1;
+      }
+    }
   }
 }

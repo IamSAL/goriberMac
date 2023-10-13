@@ -6,14 +6,17 @@ import { apps } from "src/misc/placeholder-data/apps"
 import { useSelector } from "react-redux"
 import { AppState } from "src/core/redux/redux"
 import useMousePosition from "src/helpers/hooks/useMousePosition"
+import { DOCK_STATUS } from "@types"
 // million-ignore
 const Dock = () => {
   const { isTouchingBottom } = useMousePosition({ offsetTop: 0, offsetBottom: 100 })
-  const { isMaximized } = useSelector((state: AppState) => state.system)
+  const { isMaximized, DockStatus } = useSelector((state: AppState) => state.system)
   const isDockHovered = false
 
   const runningApps = useSelector((appState: AppState) => appState.memory.appsInstances)
-  const shouldShow = isTouchingBottom || !isMaximized || isDockHovered
+  const shouldShow =
+    (isTouchingBottom || !isMaximized || isDockHovered || DockStatus === DOCK_STATUS.STICKY) &&
+    DockStatus !== DOCK_STATUS.HIDDEN
 
   const allDockApps = runningApps
     .concat(
@@ -31,7 +34,7 @@ const Dock = () => {
 
   return (
     <div className="dock-container z-[9999]" style={{ display: shouldShow ? "flex" : "none" }}>
-      <div className="mx-auto h-16 px-2 pt-1.5 pb-0.5 bg-gray-500 backdrop-blur-md dark:backdrop-blur-md bg-opacity-10 rounded-2xl border border-white border-opacity-25 flex-col justify-start items-start gap-2.5 inline-flex">
+      <div className="mx-auto h-16 px-2 pt-1.5 pb-0.5 bg-gray-500 backdrop-blur-md dark:backdrop-blur-md bg-opacity-10 rounded-2xl border border-white border-opacity-25 flex-col justify-start items-start gap-2.5 inline-flex max-w-[80vw]">
         <div className="justify-center items-center gap-2 flex w-full">
           <div className="justify-center   flex">
             {defaultApps.map((app, idx) => (
