@@ -1,15 +1,18 @@
 node {
-    def nodeVersion = '18.15.0'
+
 
     stage('Checkout') {
         checkout scm
     }
 
+     tools {
+        nodejs '/root/.nvm/versions/node/v21.5.0/bin/node'
+        pnpm '/root/.nvm/versions/node/v21.5.0/bin/pnpm'
+        pm2 '/root/.nvm/versions/node/v21.5.0/bin/pm2'
+    }
+
     stage('Install Dependencies') {
         sh "node -v"
-        sh "npm install -g pnpm"
-
-        // Install project dependencies
         sh "pnpm install"
     }
 
