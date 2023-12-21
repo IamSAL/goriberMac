@@ -6,10 +6,7 @@ node {
     }
 
     stage('Install Dependencies') {
-        // Install Node.js
-        tool name: "node-${nodeVersion}", type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-
-        // Install pnpm
+        sh "node -v"
         sh "npm install -g pnpm"
 
         // Install project dependencies
