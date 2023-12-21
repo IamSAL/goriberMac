@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "gmac",
+      "name": "goribermac",
       "script": "pnpm",
       "args": ["start"],
       "exec_mode": "cluster",
