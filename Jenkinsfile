@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
+                script { script ->
                     // Clean workspace and checkout code
                     cleanWs()
                     checkout scm
@@ -44,6 +44,7 @@ pipeline {
         always {
             // Cleanup steps if needed
             // e.g., notify, clean up temporary files, etc.
+            echo 'Build completed!'
         }
     }
 }
